@@ -135,6 +135,76 @@ class WhatsapptenantsblastingformController extends FormController
 			$this->redirect();
 		}
 
+		$contactsRaw = $this->input->post->get('contacts', [], 'array');
+		$contactsData = json_decode($contactsRaw[0], true);
+		$user = Factory::getUser();
+		$currentUserId = $user->id;
+		$db = Factory::getDbo();
+
+		// Insert to contacts
+		foreach ($contactsData as $contact) {
+			$phone = $contact['phone'];
+			$name  = $contact['name'];
+
+			$query = $db->getQuery(true);
+			$query->select($db->qn('id'))
+				->from($db->qn('#__dt_whatsapp_tenants_contacts'))
+				->where($db->qn('phone_number') . ' = ' . $db->q($phone))
+				->where($db->qn('created_by') . ' = ' . (int) $currentUserId);
+			$db->setQuery($query);
+			$existingId = $db->loadResult();
+
+			if ($existingId) {
+				$columns = [
+					$db->qn('name') . ' = ' . $db->q($name)
+				];
+				$query = $db->getQuery(true)
+					->update($db->qn('#__dt_whatsapp_tenants_contacts'))
+					->set(implode(', ', $columns))
+					->where($db->qn('id') . ' = ' . (int) $existingId)
+					->where($db->qn('created_by') . ' = ' . (int) $currentUserId);
+				$db->setQuery($query);
+				$result = $db->execute();
+			} else {
+				$columns = ['phone_number', 'name', 'created_by'];
+				$query = $db->getQuery(true)
+					->insert($db->qn('#__dt_whatsapp_tenants_contacts'))
+					->columns(implode(', ', array_map([$db, 'qn'], $columns)))
+					->values(implode(', ', [
+						$db->q($phone),
+						$db->q($name),
+						$db->q($currentUserId)
+					]));
+				$db->setQuery($query);
+				$result = $db->execute();
+			}
+		}
+
+		// Insert to scheduled messages
+		foreach ($contactsData as $contact) {
+			$targetPhone = $contact['phone'];
+			$query = $db->getQuery(true);
+			$columns = [
+				'state'             => $db->q(1),
+				'ordering'          => $db->q(0),
+				'checked_out'       => $db->q(0),
+				'checked_out_time'  => $db->q('0000-00-00 00:00:00'),
+				'created_by'        => $db->q($currentUserId),
+				'modified_by'       => $db->q($currentUserId),
+				'target_phone_number'=> $db->q($targetPhone),
+				'template_id'       => $db->q($data['template_id']),
+				'status'            => $db->q('QUEUED'),
+				'raw_response'      => $db->q('')
+			];
+			$cols = array_map([$db, 'qn'], array_keys($columns));
+			$vals = array_values($columns);
+			$query->insert($db->qn('#__dt_whatsapp_tenants_scheduled_messages'))
+				->columns(implode(', ', $cols))
+				->values(implode(', ', $vals));
+			$db->setQuery($query);
+			$db->execute();
+		}
+
 		// Attempt to save the data.
 		$return = $model->save($data);
 

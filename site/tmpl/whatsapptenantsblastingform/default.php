@@ -303,14 +303,23 @@ $canEdit = Dt_whatsapp_tenants_blastingsHelper::canUserEdit($this->item, $user);
 	</div>
 
 	<div id="blasting-message" style="margin-top: 20px;">
-		<form id="form-whatsapptenantsblasting" action="<?php echo Route::_('index.php?option=com_dt_whatsapp_tenants_blastings&task=whatsapptenantsblastingform.save'); ?>" method="post" class="form">
+		<form id="form-whatsapptenantsblasting"
+			action="<?php echo Route::_('index.php?option=com_dt_whatsapp_tenants_blastings&task=whatsapptenantsblastingform.save'); ?>"
+			method="post" class="form">
 			<?php echo HTMLHelper::_('form.token'); ?>
-			<input type="hidden" name="option" value="com_dt_whatsapp_tenants_blastings"/>
-			<input type="hidden" name="task" value="whatsapptenantsblastingform.save"/>
-			<input type="hidden" name="jform[id]" value="<?php echo isset($this->item->id) ? $this->item->id : ''; ?>" />
-			<input type="hidden" name="jform[state]" value="<?php echo isset($this->item->state) ? $this->item->state : ''; ?>" />
+			<input type="hidden" name="contacts" id="contactsField">
+			<input type="hidden" name="option" value="com_dt_whatsapp_tenants_blastings" />
+			<input type="hidden" name="jform[status]"
+				value="<?php echo isset($this->item->status) ? $this->item->status : ''; ?>" id="jform_status" />
+			<input type="hidden" name="task" value="whatsapptenantsblastingform.save" />
+			<input type="hidden" name="jform[scheduled_time]" value="" id="scheduled_time" />
+			<input type="hidden" name="jform[id]"
+				value="<?php echo isset($this->item->id) ? $this->item->id : ''; ?>" />
+			<input type="hidden" name="jform[state]"
+				value="<?php echo isset($this->item->state) ? $this->item->state : ''; ?>" />
 			<?php echo $this->form->getInput('created_by'); ?>
 			<?php echo $this->form->getInput('modified_by'); ?>
+			
 
 			<!-- Hidden file input for Excel file -->
 			<input type="file" id="excelFile" style="display:none" accept=".xlsx,.xls">
@@ -361,7 +370,11 @@ $canEdit = Dt_whatsapp_tenants_blastingsHelper::canUserEdit($this->item, $user);
 			<div class="form-step step3">
 				<div class="input-group">
 					<?php echo $this->form->renderField('mode'); ?>
-					<?php echo $this->form->renderField('scheduled_time'); ?>
+
+				</div>
+				<div id="schedule_picker_group" class="input-group" style="display:none">
+					<label for="schedule_time_picker">Date and time:</label>
+					<input type="datetime-local" id="schedule_time_picker" name="schedule_time_picker">
 				</div>
 				<div class="btns-group">
 					<a href="#" class="btn-step btn-prev">Previous</a>
@@ -403,11 +416,32 @@ $canEdit = Dt_whatsapp_tenants_blastingsHelper::canUserEdit($this->item, $user);
 	}
 
 	jQuery(document).ready(function ($) {
+
+		$('#jform_mode').change(function () {
+			if ($(this).val() === 'SCHEDULED') {
+				// show the schedule date time
+				$('#schedule_picker_group').show();
+			} else {
+				// hide the schedule date time
+				$('#schedule_picker_group').hide();
+			}
+		});
+
+		// on schedule-date time value change
+		$('#schedule_time_picker').change(function () {
+			var dateTimeVal = $(this).val(); // e.g. "2025-03-07T08:00"
+			console.log(dateTimeVal);
+			if (dateTimeVal) {
+				// Replace 'T' with a space and append ":00" to get "YYYY-MM-DD HH:MM:SS"
+				var formattedDateTime = dateTimeVal.replace('T', ' ') + ':00';
+				$('#scheduled_time').val(formattedDateTime);
+				console.log(formattedDateTime);
+			}
+		});
+
 		$('#viewBlastings').click(function () {
 			window.location.href = 'dashboard?view=whatsapptenantsblastings';
 		});
-		// Set the scheduled_time field to datetime-local type
-		$('#jform_scheduled_time').attr('type', 'datetime-local');
 
 		// Global array to hold contact objects: { phone: string, name: string }
 		var contacts = [];
@@ -452,14 +486,13 @@ $canEdit = Dt_whatsapp_tenants_blastingsHelper::canUserEdit($this->item, $user);
 						alert('Please select at least one contact.');
 						return;
 					}
-					$('#jform_scheduled_time').attr('type', 'datetime-local');
 					break;
 				case 2:
 					if ($('#jform_mode').val() === '') {
 						alert('Please select a blasting mode.');
 						return;
 					}
-					if ($('#jform_scheduled_time').val() === '') {
+					if ($('#schedule_time_picker').val() === '') {
 						if ($('#jform_mode').val() !== 'INSTANT') {
 							alert('Please select a scheduled time.');
 							return;
@@ -475,7 +508,7 @@ $canEdit = Dt_whatsapp_tenants_blastingsHelper::canUserEdit($this->item, $user);
 				if (currentStep === steps.length - 1) {
 					var template = $('#jform_template_id option:selected').text();
 					var mode = $('#jform_mode').val();
-					var scheduledTime = $('#jform_scheduled_time').val();
+					var scheduledTime = $('#schedule_time_picker').val();
 					var contactCount = contacts.length;
 					var formattedTime = new Date(scheduledTime).toLocaleString('en-US', {
 						month: 'long',
@@ -487,7 +520,7 @@ $canEdit = Dt_whatsapp_tenants_blastingsHelper::canUserEdit($this->item, $user);
 
 					$('#summary-template').text(template);
 					$('#summary-mode').text(mode);
-					$('#summary-scheduled-time').text(formattedTime);
+					$('#summary-scheduled-time').text(mode === 'INSTANT' ? 'Immediate' : formattedTime);
 					$('#summary-contacts').text(contactCount + ' contact(s) selected');
 				}
 				showStep(currentStep);
@@ -586,6 +619,15 @@ $canEdit = Dt_whatsapp_tenants_blastingsHelper::canUserEdit($this->item, $user);
 
 		$('#start-blasting').on('click', function (e) {
 			e.preventDefault();
+
+			var contactsJson = JSON.stringify(selectedContacts);
+
+			$('#contactsField').val(contactsJson);
+			$('#jform_status').val('QUEUED');
+			if ($('#jform_mode').val() === 'INSTANT') {
+				$('#scheduled_time').val(getLocalFormattedDateTime());
+			}
+
 			var $btn = $(this);
 			// Disable the button
 			$btn.prop('disabled', true);
@@ -602,15 +644,6 @@ $canEdit = Dt_whatsapp_tenants_blastingsHelper::canUserEdit($this->item, $user);
 			);
 			// Submit form
 			$('#form-whatsapptenantsblasting').submit();
-
-			// Insert your blasting initiation logic here.
-			// For demonstration, we'll simulate a 3-second async operation:
-			// setTimeout(function () {
-			// 	// Once complete, re-enable the button and remove the spinner
-			// 	$btn.prop('disabled', false);
-			// 	$btn.find('#fifth-loader').empty();
-			// 	alert("Blasting initiated and completed!");
-			// }, 3000);
 		});
 	});
 
