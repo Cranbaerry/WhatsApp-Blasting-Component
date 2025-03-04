@@ -6,7 +6,7 @@
                class="js-stools-search-string" />
 
         <field name="template_id" type="sql" label="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSSCHEDULEDMESSAGE_TEMPLATE_ID" query="SELECT `id` AS `id`, `name` AS val FROM `#__dt_whatsapp_tenants_templates`" header="COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_TEMPLATE_ID_FILTER" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
-<field name="blasting_id" type="sql" label="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSSCHEDULEDMESSAGE_BLASTING_ID" query="SELECT `scheduled_time` AS `scheduled_time`, `scheduled_time` AS val FROM `#__dt_whatsapp_tenants_blastings`" header="COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_BLASTING_ID_FILTER" key_field="scheduled_time" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+<field name="blasting_id" type="sql" label="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSSCHEDULEDMESSAGE_BLASTING_ID" query="SELECT `id` AS `id`, `scheduled_time` AS val FROM `#__dt_whatsapp_tenants_blastings`" header="COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_BLASTING_ID_FILTER" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
 
 
     </fields>

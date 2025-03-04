@@ -232,7 +232,7 @@ class WhatsapptenantsscheduledmessagesModel extends ListModel
 		$query->join('LEFT', '#__dt_whatsapp_tenants_templates AS #__dt_whatsapp_tenants_templates_4168298 ON #__dt_whatsapp_tenants_templates_4168298.`id` = a.`template_id`');
 		// Join over the foreign key 'blasting_id'
 		$query->select('`#__dt_whatsapp_tenants_blastings_4168833`.`scheduled_time` AS whatsapptenantsblastings_fk_value_4168833');
-		$query->join('LEFT', '#__dt_whatsapp_tenants_blastings AS #__dt_whatsapp_tenants_blastings_4168833 ON #__dt_whatsapp_tenants_blastings_4168833.`scheduled_time` = a.`blasting_id`');
+		$query->join('LEFT', '#__dt_whatsapp_tenants_blastings AS #__dt_whatsapp_tenants_blastings_4168833 ON #__dt_whatsapp_tenants_blastings_4168833.`id` = a.`blasting_id`');
 		
 
 		// Filter by published state
@@ -341,7 +341,7 @@ class WhatsapptenantsscheduledmessagesModel extends ListModel
 					$query
 						->select('`#__dt_whatsapp_tenants_blastings_4168833`.`scheduled_time`')
 						->from($db->quoteName('#__dt_whatsapp_tenants_blastings', '#__dt_whatsapp_tenants_blastings_4168833'))
-						->where($db->quoteName('#__dt_whatsapp_tenants_blastings_4168833.scheduled_time') . ' = '. $db->quote($db->escape($value)));
+						->where($db->quoteName('#__dt_whatsapp_tenants_blastings_4168833.id') . ' = '. $db->quote($db->escape($value)));
 
 					$db->setQuery($query);
 					$results = $db->loadObject();

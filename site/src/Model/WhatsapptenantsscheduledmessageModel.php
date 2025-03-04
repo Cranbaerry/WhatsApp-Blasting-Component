@@ -252,7 +252,7 @@ class WhatsapptenantsscheduledmessageModel extends ItemModel
 				$query
 					->select('`#__dt_whatsapp_tenants_blastings_4168833`.`scheduled_time`')
 					->from($db->quoteName('#__dt_whatsapp_tenants_blastings', '#__dt_whatsapp_tenants_blastings_4168833'))
-					->where($db->quoteName('scheduled_time') . ' = ' . $db->quote($value));
+					->where($db->quoteName('id') . ' = ' . $db->quote($value));
 
 				$db->setQuery($query);
 				$results = $db->loadObject();
