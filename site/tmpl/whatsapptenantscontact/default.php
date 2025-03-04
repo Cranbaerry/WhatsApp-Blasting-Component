@@ -31,23 +31,13 @@ use Joomla\Utilities\ArrayHelper;
 		
 
 		<tr>
-			<th><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSCONTACT_DISPLAYNAME'); ?></th>
-			<td><?php echo $this->item->displayname; ?></td>
+			<th><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSCONTACT_NAME'); ?></th>
+			<td><?php echo $this->item->name; ?></td>
 		</tr>
 
 		<tr>
-			<th><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSCONTACT_PHONENUMBER'); ?></th>
-			<td><?php echo $this->item->phonenumber; ?></td>
-		</tr>
-
-		<tr>
-			<th><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSCONTACT_WHATSAPPID'); ?></th>
-			<td><?php echo $this->item->whatsappid; ?></td>
-		</tr>
-
-		<tr>
-			<th><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSCONTACT_QUALITY_RATING'); ?></th>
-			<td><?php echo $this->item->quality_rating; ?></td>
+			<th><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSCONTACT_PHONE_NUMBER'); ?></th>
+			<td><?php echo $this->item->phone_number; ?></td>
 		</tr>
 
 	</table>

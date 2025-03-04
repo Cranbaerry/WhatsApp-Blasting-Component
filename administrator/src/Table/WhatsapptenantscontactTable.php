@@ -44,30 +44,7 @@ class WhatsapptenantscontactTable extends Table implements VersionableTableInter
      */
     protected $_supportNullValue = true;
 
-	/**
-	 * Check if a field is unique
-	 *
-	 * @param   string  $field  Name of the field
-	 *
-	 * @return bool True if unique
-	 */
-	private function isUnique ($field)
-	{
-		$db = $this->_db;
-		$query = $db->getQuery(true);
-
-		$query
-			->select($db->quoteName($field))
-			->from($db->quoteName($this->_tbl))
-			->where($db->quoteName($field) . ' = ' . $db->quote($this->$field))
-			->where($db->quoteName('id') . ' <> ' . (int) $this->{$this->_tbl_key});
-
-		$db->setQuery($query);
-		$db->execute();
-
-		return ($db->getNumRows() == 0) ? true : false;
-	}
-
+	
 	/**
 	 * Constructor
 	 *
@@ -233,16 +210,6 @@ class WhatsapptenantscontactTable extends Table implements VersionableTableInter
 			$this->ordering = self::getNextOrder();
 		}
 		
-		// Check if phonenumber is unique
-		if (!$this->isUnique('phonenumber'))
-		{
-			throw new \Exception(Text::sprintf('COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACT_PHONENUMBER_UNIQUE_ERROR','phonenumber',$this->phonenumber));
-		}
-		// Check if whatsappid is unique
-		if (!$this->isUnique('whatsappid'))
-		{
-			throw new \Exception(Text::sprintf('COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACT_WHATSAPPID_UNIQUE_ERROR','whatsappid',$this->whatsappid));
-		}
 		
 
 		return parent::check();

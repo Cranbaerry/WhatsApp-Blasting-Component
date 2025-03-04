@@ -62,21 +62,12 @@ if (!empty($saveOrder))
 						
 						
 						<th class='left'>
-							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_DISPLAYNAME', 'a.displayname', $listDirn, $listOrder); ?>
+							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_NAME', 'a.name', $listDirn, $listOrder); ?>
 						</th>
 						<th class='left'>
-							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_PHONENUMBER', 'a.phonenumber', $listDirn, $listOrder); ?>
-						</th>
-						<th class='left'>
-							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_WHATSAPPID', 'a.whatsappid', $listDirn, $listOrder); ?>
-						</th>
-						<th class='left'>
-							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_QUALITY_RATING', 'a.quality_rating', $listDirn, $listOrder); ?>
+							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_PHONE_NUMBER', 'a.phone_number', $listDirn, $listOrder); ?>
 						</th>
 						
-					<th scope="col" class="w-3 d-none d-lg-table-cell" >
-
-						<?php echo HTMLHelper::_('searchtools.sort',  'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>					</th>
 					</tr>
 					</thead>
 					<tfoot>
@@ -107,27 +98,16 @@ if (!empty($saveOrder))
 								<?php endif; ?>
 								<?php if ($canEdit) : ?>
 									<a href="<?php echo Route::_('index.php?option=com_dt_whatsapp_tenants_blastings&task=whatsapptenantscontact.edit&id='.(int) $item->id); ?>">
-									<?php echo $this->escape($item->displayname); ?>
+									<?php echo $this->escape($item->name); ?>
 									</a>
 								<?php else : ?>
-												<?php echo $this->escape($item->displayname); ?>
+												<?php echo $this->escape($item->name); ?>
 								<?php endif; ?>
 							</td>
 							<td>
-								<?php echo $item->phonenumber; ?>
-							</td>
-							<td>
-								<?php echo $item->whatsappid; ?>
-							</td>
-							<td>
-								<?php echo $item->quality_rating; ?>
+								<?php echo $item->phone_number; ?>
 							</td>
 							
-							<td class="d-none d-lg-table-cell">
-							<?php echo $item->id; ?>
-
-							</td>
-
 
 						</tr>
 					<?php endforeach; ?>

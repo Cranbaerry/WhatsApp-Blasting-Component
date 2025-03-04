@@ -78,10 +78,10 @@ if (!empty($saveOrder))
 						<th class='left'>
 							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_STATUS', 'a.status', $listDirn, $listOrder); ?>
 						</th>
+						<th class='left'>
+							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_BLASTING_ID', 'a.blasting_id', $listDirn, $listOrder); ?>
+						</th>
 						
-					<th scope="col" class="w-3 d-none d-lg-table-cell" >
-
-						<?php echo HTMLHelper::_('searchtools.sort',  'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>					</th>
 					</tr>
 					</thead>
 					<tfoot>
@@ -135,29 +135,27 @@ if (!empty($saveOrder))
 							
 							
 							<td>
-								<?php echo $item->target_phone_number; ?>
-							</td>
-							<td>
-								<?php echo $item->template_id; ?>
-							</td>
-							<td>
 								<?php if (isset($item->checked_out) && $item->checked_out && ($canEdit || $canChange)) : ?>
 									<?php echo HTMLHelper::_('jgrid.checkedout', $i, $item->uEditor, $item->checked_out_time, 'whatsapptenantsscheduledmessages.', $canCheckin); ?>
 								<?php endif; ?>
 								<?php if ($canEdit) : ?>
 									<a href="<?php echo Route::_('index.php?option=com_dt_whatsapp_tenants_blastings&task=whatsapptenantsscheduledmessage.edit&id='.(int) $item->id); ?>">
-									<?php echo $this->escape($item->status); ?>
+									<?php echo $this->escape($item->target_phone_number); ?>
 									</a>
 								<?php else : ?>
-												<?php echo $this->escape($item->status); ?>
+												<?php echo $this->escape($item->target_phone_number); ?>
 								<?php endif; ?>
 							</td>
-							
-							<td class="d-none d-lg-table-cell">
-							<?php echo $item->id; ?>
-
+							<td>
+								<?php echo $item->template_id; ?>
 							</td>
-
+							<td>
+								<?php echo $item->status; ?>
+							</td>
+							<td>
+								<?php echo $item->blasting_id; ?>
+							</td>
+							
 
 						</tr>
 					<?php endforeach; ?>

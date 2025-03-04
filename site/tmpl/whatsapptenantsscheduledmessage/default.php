@@ -41,6 +41,11 @@ use Joomla\Utilities\ArrayHelper;
 		</tr>
 
 		<tr>
+			<th><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSSCHEDULEDMESSAGE_BLASTING_ID'); ?></th>
+			<td><?php echo $this->item->blasting_id; ?></td>
+		</tr>
+
+		<tr>
 			<th><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSSCHEDULEDMESSAGE_STATUS'); ?></th>
 			<td><?php echo $this->item->status; ?></td>
 		</tr>

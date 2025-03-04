@@ -43,12 +43,12 @@ class WhatsapptenantsblastingsModel extends ListModel
 		{
 			$config['filter_fields'] = array(
 				'id', 'a.id',
+				'status', 'a.status',
 				'state', 'a.state',
 				'ordering', 'a.ordering',
 				'created_by', 'a.created_by',
 				'modified_by', 'a.modified_by',
 				'template_id', 'a.template_id',
-				'status', 'a.status',
 				'mode', 'a.mode',
 				'scheduled_time', 'a.scheduled_time',
 			);
@@ -190,7 +190,7 @@ class WhatsapptenantsblastingsModel extends ListModel
 				else
 				{
 					$search = $db->Quote('%' . $db->escape($search, true) . '%');
-					$query->where('(#__dt_whatsapp_tenants_templates_4168267.name LIKE ' . $search . '  OR  a.status LIKE ' . $search . ' )');
+					$query->where('( a.status LIKE ' . $search . '  OR #__dt_whatsapp_tenants_templates_4168267.name LIKE ' . $search . ' )');
 				}
 			}
 			

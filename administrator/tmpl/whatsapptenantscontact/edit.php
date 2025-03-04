@@ -33,10 +33,8 @@ HTMLHelper::_('bootstrap.tooltip');
 		<div class="col-md-12 form-horizontal">
 			<fieldset class="adminform">
 				<legend><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FIELDSET_WHATSAPPTENANTSCONTACT'); ?></legend>
-				<?php echo $this->form->renderField('displayname'); ?>
-				<?php echo $this->form->renderField('phonenumber'); ?>
-				<?php echo $this->form->renderField('whatsappid'); ?>
-				<?php echo $this->form->renderField('quality_rating'); ?>
+				<?php echo $this->form->renderField('name'); ?>
+				<?php echo $this->form->renderField('phone_number'); ?>
 			</fieldset>
 		</div>
 	</div>

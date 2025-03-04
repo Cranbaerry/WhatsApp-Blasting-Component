@@ -199,7 +199,7 @@ class PlgFinderDt_whatsapp_tenants_blastingswhatsapptenantscontacts extends Adap
 
 		// Check if we can use the supplied SQL query.
 		$query = $query instanceof DatabaseQuery ? $query : $db->getQuery(true)
-		->select('a.id, a.displayname AS title, a.displayname AS summary, a.state AS state, 1 AS access');
+		->select('a.id, a.name AS title, a.name AS summary, a.state AS state, 1 AS access');
 
 
 		$query->from($this->table . ' as a');

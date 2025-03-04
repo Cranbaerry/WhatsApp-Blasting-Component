@@ -41,11 +41,6 @@ if (!$canEdit && Factory::getApplication()->getIdentity()->authorise('core.edit.
 		</tr>
 
 		<tr>
-			<th><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSBLASTING_STATUS'); ?></th>
-			<td><?php echo $this->item->status; ?></td>
-		</tr>
-
-		<tr>
 			<th><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSBLASTING_MODE'); ?></th>
 			<td>
 			<?php

@@ -256,18 +256,6 @@ class WhatsapptenantsscheduledmessageModel extends AdminModel
 						throw new \Exception($table->getError());
 					}
 					
-				if (!empty($table->target_phone_number))
-				{
-					if (is_array($table->target_phone_number))
-					{
-						$table->target_phone_number = implode(',', $table->target_phone_number);
-					}
-				}
-				else
-				{
-					$table->target_phone_number = '';
-				}
-
 				if (!empty($table->template_id))
 				{
 					if (is_array($table->template_id))
@@ -278,6 +266,18 @@ class WhatsapptenantsscheduledmessageModel extends AdminModel
 				else
 				{
 					$table->template_id = '';
+				}
+
+				if (!empty($table->blasting_id))
+				{
+					if (is_array($table->blasting_id))
+					{
+						$table->blasting_id = implode(',', $table->blasting_id);
+					}
+				}
+				else
+				{
+					$table->blasting_id = '';
 				}
 
 

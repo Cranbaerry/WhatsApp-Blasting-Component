@@ -34,7 +34,6 @@ HTMLHelper::_('bootstrap.tooltip');
 			<fieldset class="adminform">
 				<legend><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FIELDSET_WHATSAPPTENANTSBLASTING'); ?></legend>
 				<?php echo $this->form->renderField('template_id'); ?>
-				<?php echo $this->form->renderField('status'); ?>
 				<?php echo $this->form->renderField('mode'); ?>
 				<?php echo $this->form->renderField('scheduled_time'); ?>
 			</fieldset>

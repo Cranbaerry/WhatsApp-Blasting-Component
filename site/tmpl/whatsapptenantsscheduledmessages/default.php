@@ -51,10 +51,6 @@ $wa->useStyle('com_dt_whatsapp_tenants_blastings.list');
 			<tr>
 				
 					<th class=''>
-						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_ID', 'a.id', $listDirn, $listOrder); ?>
-					</th>
-
-					<th class=''>
 						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_TARGET_PHONE_NUMBER', 'a.target_phone_number', $listDirn, $listOrder); ?>
 					</th>
 
@@ -64,6 +60,10 @@ $wa->useStyle('com_dt_whatsapp_tenants_blastings.list');
 
 					<th class=''>
 						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_STATUS', 'a.status', $listDirn, $listOrder); ?>
+					</th>
+
+					<th class=''>
+						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_BLASTING_ID', 'a.blasting_id', $listDirn, $listOrder); ?>
 					</th>
 
 						<?php if ($canEdit || $canDelete): ?>
@@ -90,22 +90,22 @@ $wa->useStyle('com_dt_whatsapp_tenants_blastings.list');
 				<tr class="row<?php echo $i % 2; ?>">
 					
 					<td>
-						<?php echo $item->id; ?>
-					</td>
-					<td>
-						<?php echo $item->target_phone_number; ?>
-					</td>
-					<td>
-						<?php echo $item->template_id; ?>
-					</td>
-					<td>
 						<?php $canCheckin = Factory::getApplication()->getIdentity()->authorise('core.manage', 'com_dt_whatsapp_tenants_blastings.' . $item->id) || $item->checked_out == Factory::getApplication()->getIdentity()->id; ?>
 						<?php if($canCheckin && $item->checked_out > 0) : ?>
 							<a href="<?php echo Route::_('index.php?option=com_dt_whatsapp_tenants_blastings&task=whatsapptenantsscheduledmessage.checkin&id=' . $item->id .'&'. Session::getFormToken() .'=1'); ?>">
 							<?php echo HTMLHelper::_('jgrid.checkedout', $i, $item->uEditor, $item->checked_out_time, 'whatsapptenantsscheduledmessage.', false); ?></a>
 						<?php endif; ?>
 						<a href="<?php echo Route::_('index.php?option=com_dt_whatsapp_tenants_blastings&view=whatsapptenantsscheduledmessage&id='.(int) $item->id); ?>">
-							<?php echo $this->escape($item->status); ?></a>
+							<?php echo $this->escape($item->target_phone_number); ?></a>
+					</td>
+					<td>
+						<?php echo $item->template_id; ?>
+					</td>
+					<td>
+						<?php echo $item->status; ?>
+					</td>
+					<td>
+						<?php echo $item->blasting_id; ?>
 					</td>
 					<?php if ($canEdit || $canDelete): ?>
 						<td class="center">

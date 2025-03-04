@@ -106,20 +106,6 @@ class WhatsapptenantsscheduledmessageTable extends Table implements VersionableT
 			$array['modified_by'] = Factory::getUser()->id;
 		}
 
-		// Support for multiple or not foreign key field: target_phone_number
-			if(!empty($array['target_phone_number']))
-			{
-				if(is_array($array['target_phone_number'])){
-					$array['target_phone_number'] = implode(',',$array['target_phone_number']);
-				}
-				else if(strrpos($array['target_phone_number'], ',') != false){
-					$array['target_phone_number'] = explode(',',$array['target_phone_number']);
-				}
-			}
-			else {
-				$array['target_phone_number'] = 0;
-			}
-
 		// Support for multiple or not foreign key field: template_id
 			if(!empty($array['template_id']))
 			{
@@ -132,6 +118,20 @@ class WhatsapptenantsscheduledmessageTable extends Table implements VersionableT
 			}
 			else {
 				$array['template_id'] = 0;
+			}
+
+		// Support for multiple or not foreign key field: blasting_id
+			if(!empty($array['blasting_id']))
+			{
+				if(is_array($array['blasting_id'])){
+					$array['blasting_id'] = implode(',',$array['blasting_id']);
+				}
+				else if(strrpos($array['blasting_id'], ',') != false){
+					$array['blasting_id'] = explode(',',$array['blasting_id']);
+				}
+			}
+			else {
+				$array['blasting_id'] = 0;
 			}
 
 		if (isset($array['params']) && is_array($array['params']))

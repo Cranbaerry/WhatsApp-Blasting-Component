@@ -51,23 +51,11 @@ $wa->useStyle('com_dt_whatsapp_tenants_blastings.list');
 			<tr>
 				
 					<th class=''>
-						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_ID', 'a.id', $listDirn, $listOrder); ?>
+						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_NAME', 'a.name', $listDirn, $listOrder); ?>
 					</th>
 
 					<th class=''>
-						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_DISPLAYNAME', 'a.displayname', $listDirn, $listOrder); ?>
-					</th>
-
-					<th class=''>
-						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_PHONENUMBER', 'a.phonenumber', $listDirn, $listOrder); ?>
-					</th>
-
-					<th class=''>
-						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_WHATSAPPID', 'a.whatsappid', $listDirn, $listOrder); ?>
-					</th>
-
-					<th class=''>
-						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_QUALITY_RATING', 'a.quality_rating', $listDirn, $listOrder); ?>
+						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_PHONE_NUMBER', 'a.phone_number', $listDirn, $listOrder); ?>
 					</th>
 
 						<?php if ($canEdit || $canDelete): ?>
@@ -94,25 +82,16 @@ $wa->useStyle('com_dt_whatsapp_tenants_blastings.list');
 				<tr class="row<?php echo $i % 2; ?>">
 					
 					<td>
-						<?php echo $item->id; ?>
-					</td>
-					<td>
 						<?php $canCheckin = Factory::getApplication()->getIdentity()->authorise('core.manage', 'com_dt_whatsapp_tenants_blastings.' . $item->id) || $item->checked_out == Factory::getApplication()->getIdentity()->id; ?>
 						<?php if($canCheckin && $item->checked_out > 0) : ?>
 							<a href="<?php echo Route::_('index.php?option=com_dt_whatsapp_tenants_blastings&task=whatsapptenantscontact.checkin&id=' . $item->id .'&'. Session::getFormToken() .'=1'); ?>">
 							<?php echo HTMLHelper::_('jgrid.checkedout', $i, $item->uEditor, $item->checked_out_time, 'whatsapptenantscontact.', false); ?></a>
 						<?php endif; ?>
 						<a href="<?php echo Route::_('index.php?option=com_dt_whatsapp_tenants_blastings&view=whatsapptenantscontact&id='.(int) $item->id); ?>">
-							<?php echo $this->escape($item->displayname); ?></a>
+							<?php echo $this->escape($item->name); ?></a>
 					</td>
 					<td>
-						<?php echo $item->phonenumber; ?>
-					</td>
-					<td>
-						<?php echo $item->whatsappid; ?>
-					</td>
-					<td>
-						<?php echo $item->quality_rating; ?>
+						<?php echo $item->phone_number; ?>
 					</td>
 					<?php if ($canEdit || $canDelete): ?>
 						<td class="center">

@@ -155,10 +155,10 @@ class HtmlView extends BaseHtmlView
 	protected function getSortFields()
 	{
 		return array(
-			'a.`id`' => Text::_('JGRID_HEADING_ID'),
 			'a.`ordering`' => Text::_('JGRID_HEADING_ORDERING'),
 			'a.`target_phone_number`' => Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_TARGET_PHONE_NUMBER'),
 			'a.`template_id`' => Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_TEMPLATE_ID'),
+			'a.`blasting_id`' => Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_BLASTING_ID'),
 			'a.`status`' => Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_STATUS'),
 		);
 	}

@@ -47,10 +47,8 @@ class WhatsapptenantscontactsModel extends ListModel
 				'ordering', 'a.ordering',
 				'created_by', 'a.created_by',
 				'modified_by', 'a.modified_by',
-				'displayname', 'a.displayname',
-				'phonenumber', 'a.phonenumber',
-				'whatsappid', 'a.whatsappid',
-				'quality_rating', 'a.quality_rating',
+				'name', 'a.name',
+				'phone_number', 'a.phone_number',
 			);
 		}
 
@@ -187,7 +185,7 @@ class WhatsapptenantscontactsModel extends ListModel
 				else
 				{
 					$search = $db->Quote('%' . $db->escape($search, true) . '%');
-					$query->where('( a.displayname LIKE ' . $search . '  OR  a.phonenumber LIKE ' . $search . '  OR  a.whatsappid LIKE ' . $search . ' )');
+					$query->where('( a.name LIKE ' . $search . '  OR  a.phone_number LIKE ' . $search . ' )');
 				}
 			}
 			

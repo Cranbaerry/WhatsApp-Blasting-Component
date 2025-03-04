@@ -47,6 +47,7 @@ class WhatsapptenantsscheduledmessagesModel extends ListModel
 				'modified_by', 'a.modified_by',
 				'target_phone_number', 'a.target_phone_number',
 				'template_id', 'a.template_id',
+				'blasting_id', 'a.blasting_id',
 				'status', 'a.status',
 				'raw_response', 'a.raw_response',
 			);
@@ -226,12 +227,12 @@ class WhatsapptenantsscheduledmessagesModel extends ListModel
 		// Join over the user field 'modified_by'
 		$query->select('`modified_by`.name AS `modified_by`');
 		$query->join('LEFT', '#__users AS `modified_by` ON `modified_by`.id = a.`modified_by`');
-		// Join over the foreign key 'target_phone_number'
-		$query->select('`#__dt_whatsapp_tenants_contacts_4168297`.`phonenumber` AS whatsapptenantscontacts_fk_value_4168297');
-		$query->join('LEFT', '#__dt_whatsapp_tenants_contacts AS #__dt_whatsapp_tenants_contacts_4168297 ON #__dt_whatsapp_tenants_contacts_4168297.`id` = a.`target_phone_number`');
 		// Join over the foreign key 'template_id'
 		$query->select('`#__dt_whatsapp_tenants_templates_4168298`.`name` AS #__dt_whatsapp_tenants_templates_fk_value_4168298');
 		$query->join('LEFT', '#__dt_whatsapp_tenants_templates AS #__dt_whatsapp_tenants_templates_4168298 ON #__dt_whatsapp_tenants_templates_4168298.`id` = a.`template_id`');
+		// Join over the foreign key 'blasting_id'
+		$query->select('`#__dt_whatsapp_tenants_blastings_4168833`.`scheduled_time` AS whatsapptenantsblastings_fk_value_4168833');
+		$query->join('LEFT', '#__dt_whatsapp_tenants_blastings AS #__dt_whatsapp_tenants_blastings_4168833 ON #__dt_whatsapp_tenants_blastings_4168833.`scheduled_time` = a.`blasting_id`');
 		
 
 		// Filter by published state
@@ -258,7 +259,7 @@ class WhatsapptenantsscheduledmessagesModel extends ListModel
 			else
 			{
 				$search = $db->Quote('%' . $db->escape($search, true) . '%');
-				$query->where('(#__dt_whatsapp_tenants_contacts_4168297.phonenumber LIKE ' . $search . '  OR #__dt_whatsapp_tenants_templates_4168298.name LIKE ' . $search . ' )');
+				$query->where('( a.target_phone_number LIKE ' . $search . '  OR #__dt_whatsapp_tenants_templates_4168298.name LIKE ' . $search . ' )');
 			}
 		}
 		
@@ -269,6 +270,14 @@ class WhatsapptenantsscheduledmessagesModel extends ListModel
 		if ($filter_template_id !== null && !empty($filter_template_id))
 		{
 			$query->where("a.`template_id` = '".$db->escape($filter_template_id)."'");
+		}
+
+		// Filtering blasting_id
+		$filter_blasting_id = $this->state->get("filter.blasting_id");
+
+		if ($filter_blasting_id !== null && !empty($filter_blasting_id))
+		{
+			$query->where("a.`blasting_id` = '".$db->escape($filter_blasting_id)."'");
 		}
 		// Add the list ordering clause.
 		$orderCol  = $this->state->get('list.ordering', 'id');
@@ -294,32 +303,6 @@ class WhatsapptenantsscheduledmessagesModel extends ListModel
 		foreach ($items as $oneItem)
 		{
 
-			if (isset($oneItem->target_phone_number))
-			{
-				$values    = explode(',', $oneItem->target_phone_number);
-				$textValue = array();
-
-				foreach ($values as $value)
-				{
-					$db    = $this->getDbo();
-					$query = $db->getQuery(true);
-					$query
-						->select('`#__dt_whatsapp_tenants_contacts_4168297`.`phonenumber`')
-						->from($db->quoteName('#__dt_whatsapp_tenants_contacts', '#__dt_whatsapp_tenants_contacts_4168297'))
-						->where($db->quoteName('#__dt_whatsapp_tenants_contacts_4168297.id') . ' = '. $db->quote($db->escape($value)));
-
-					$db->setQuery($query);
-					$results = $db->loadObject();
-
-					if ($results)
-					{
-						$textValue[] = $results->phonenumber;
-					}
-				}
-
-				$oneItem->target_phone_number = !empty($textValue) ? implode(', ', $textValue) : $oneItem->target_phone_number;
-			}
-
 			if (isset($oneItem->template_id))
 			{
 				$values    = explode(',', $oneItem->template_id);
@@ -344,6 +327,32 @@ class WhatsapptenantsscheduledmessagesModel extends ListModel
 				}
 
 				$oneItem->template_id = !empty($textValue) ? implode(', ', $textValue) : $oneItem->template_id;
+			}
+
+			if (isset($oneItem->blasting_id))
+			{
+				$values    = explode(',', $oneItem->blasting_id);
+				$textValue = array();
+
+				foreach ($values as $value)
+				{
+					$db    = $this->getDbo();
+					$query = $db->getQuery(true);
+					$query
+						->select('`#__dt_whatsapp_tenants_blastings_4168833`.`scheduled_time`')
+						->from($db->quoteName('#__dt_whatsapp_tenants_blastings', '#__dt_whatsapp_tenants_blastings_4168833'))
+						->where($db->quoteName('#__dt_whatsapp_tenants_blastings_4168833.scheduled_time') . ' = '. $db->quote($db->escape($value)));
+
+					$db->setQuery($query);
+					$results = $db->loadObject();
+
+					if ($results)
+					{
+						$textValue[] = $results->scheduled_time;
+					}
+				}
+
+				$oneItem->blasting_id = !empty($textValue) ? implode(', ', $textValue) : $oneItem->blasting_id;
 			}
 		}
 

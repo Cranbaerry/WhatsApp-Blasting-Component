@@ -12,6 +12,7 @@
 							<option value="">JOPTION_SELECT_PUBLISHED</option>
 						</field>
         <field name="template_id" type="sql" label="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSSCHEDULEDMESSAGE_TEMPLATE_ID" query="SELECT `id` AS `id`, `name` AS val FROM `#__dt_whatsapp_tenants_templates`" header="COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_TEMPLATE_ID_FILTER" key_field="id" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
+<field name="blasting_id" type="sql" label="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSSCHEDULEDMESSAGE_BLASTING_ID" query="SELECT `scheduled_time` AS `scheduled_time`, `scheduled_time` AS val FROM `#__dt_whatsapp_tenants_blastings`" header="COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_BLASTING_ID_FILTER" key_field="scheduled_time" value_field="val" class="inputbox" onchange="this.form.submit()" translate="true"/>
 
 
     </fields>
@@ -26,7 +27,7 @@
                default="a.id DESC"
         >
             <option value="">JGLOBAL_SORT_BY</option>
-            <option value="a.id ASC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_ID_ASC</option><option value="a.id DESC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_ID_DESC</option><option value="a.ordering ASC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_ORDERING_ASC</option><option value="a.ordering DESC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_ORDERING_DESC</option><option value="a.target_phone_number ASC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_TARGET_PHONE_NUMBER_ASC</option><option value="a.target_phone_number DESC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_TARGET_PHONE_NUMBER_DESC</option><option value="a.template_id ASC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_TEMPLATE_ID_ASC</option><option value="a.template_id DESC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_TEMPLATE_ID_DESC</option><option value="a.status ASC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_STATUS_ASC</option><option value="a.status DESC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_STATUS_DESC</option>
+            <option value="a.ordering ASC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_ORDERING_ASC</option><option value="a.ordering DESC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_ORDERING_DESC</option><option value="a.target_phone_number ASC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_TARGET_PHONE_NUMBER_ASC</option><option value="a.target_phone_number DESC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_TARGET_PHONE_NUMBER_DESC</option><option value="a.template_id ASC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_TEMPLATE_ID_ASC</option><option value="a.template_id DESC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_TEMPLATE_ID_DESC</option><option value="a.blasting_id ASC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_BLASTING_ID_ASC</option><option value="a.blasting_id DESC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_BLASTING_ID_DESC</option><option value="a.status ASC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_STATUS_ASC</option><option value="a.status DESC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_STATUS_DESC</option>
 
         </field>
 
