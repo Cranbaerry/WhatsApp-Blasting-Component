@@ -17,7 +17,7 @@
       <option value="INSTANT">COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSBLASTINGS_MODE_OPTION_INSTANT</option>
       <option value="SCHEDULED">COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSBLASTINGS_MODE_OPTION_SCHEDULED</option>
     </field>
-    <field name="scheduled_time" type="calendar" class="inputbox" format="%Y-%m-%d %H:%M:%S" showtime="true" translateformat="true" required="true" label="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSBLASTING_SCHEDULED_TIME" description="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_DESC_WHATSAPPTENANTSBLASTING_SCHEDULED_TIME" hint="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSBLASTING_SCHEDULED_TIME" showon="mode:SCHEDULED"/>
+    <field name="scheduled_time" type="calendar" class="inputbox" format="%Y-%m-%d %H:%M:%S" showtime="true" translateformat="true" required="false" label="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSBLASTING_SCHEDULED_TIME" description="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_DESC_WHATSAPPTENANTSBLASTING_SCHEDULED_TIME" hint="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSBLASTING_SCHEDULED_TIME" showon="mode:SCHEDULED"/>
     <field name="version_note" type="text" label="JGLOBAL_FIELD_VERSION_NOTE_LABEL" description="JGLOBAL_FIELD_VERSION_NOTE_DESC" class="inputbox" size="45" labelclass="control-label"/>
   </fieldset>
 </form>
