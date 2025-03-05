@@ -63,8 +63,7 @@ class DisplayController extends \Joomla\CMS\MVC\Controller\BaseController
 		{
 			$app = Factory::getApplication();
 			$app->enqueueMessage('Please login to access this page', 'warning');
-			$app->setRedirect('/login');
-			$app->redirect();
+			$app->redirect('/login');
 		}
 
 		parent::display($cachable, $urlparams);
