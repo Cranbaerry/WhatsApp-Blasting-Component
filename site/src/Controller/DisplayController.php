@@ -62,9 +62,11 @@ class DisplayController extends \Joomla\CMS\MVC\Controller\BaseController
 		if (!$user->id)
 		{
 			$app = Factory::getApplication();
-			$app->redirect('/login', Text::_('COM_DT_WHATSAPP_TENANTS_TEMPLATES_LOGIN_REQUIRED'), 'info');
+			$app->enqueueMessage('Please login to access this page', 'warning');
+			$app->setRedirect('/login');
+			$app->redirect();
 		}
-		
+
 		parent::display($cachable, $urlparams);
 		return $this;
 	}
