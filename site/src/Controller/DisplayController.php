@@ -57,7 +57,14 @@ class DisplayController extends \Joomla\CMS\MVC\Controller\BaseController
 		$view = $view == "featured" ? 'whatsapptenantsblastings' : $view;
 		$this->input->set('view', $view);
 		
-
+		// Redirect if not logged in
+		$user = Factory::getUser();
+		if (!$user->id)
+		{
+			$app = Factory::getApplication();
+			$app->redirect('/login', Text::_('COM_DT_WHATSAPP_TENANTS_TEMPLATES_LOGIN_REQUIRED'), 'info');
+		}
+		
 		parent::display($cachable, $urlparams);
 		return $this;
 	}
