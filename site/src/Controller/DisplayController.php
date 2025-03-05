@@ -62,7 +62,7 @@ class DisplayController extends \Joomla\CMS\MVC\Controller\BaseController
 		if (!$user->id)
 		{
 			$app = Factory::getApplication();
-			$app->enqueueMessage('Please login to access this page', 'warning');
+			$app->enqueueMessage('Please login to access this page', 'info');
 			$app->redirect('/login');
 		}
 
