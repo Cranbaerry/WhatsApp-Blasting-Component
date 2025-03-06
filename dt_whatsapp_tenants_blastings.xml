@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="4.0" method="upgrade">
     <name>com_dt_whatsapp_tenants_blastings</name>
-    <creationDate>2025-03-04</creationDate>
+    <creationDate>2025-03-06</creationDate>
     <copyright>2025 dreamztech</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <author>dreamztech</author>
@@ -57,6 +57,8 @@
 
 			<menu link="option=com_dt_whatsapp_tenants_blastings&amp;view=whatsapptenantsmessagehistories" view="whatsapptenantsmessagehistories" alt="Dt_whatsapp_tenants_blastings/Whatsapptenantsmessagehistories">COM_DT_WHATSAPP_TENANTS_BLASTINGS_TITLE_WHATSAPPTENANTSMESSAGEHISTORIES</menu>
 
+			<menu link="option=com_dt_whatsapp_tenants_blastings&amp;view=whatsapptenantskeywords" view="whatsapptenantskeywords" alt="Dt_whatsapp_tenants_blastings/Whatsapptenantskeywords">COM_DT_WHATSAPP_TENANTS_BLASTINGS_TITLE_WHATSAPPTENANTSKEYWORDS</menu>
+
         </submenu>
         <files folder="administrator">
             <filename>access.xml</filename>
@@ -86,6 +88,7 @@
 		<plugin group="finder" plugin="dt_whatsapp_tenants_blastingswhatsapptenantscontacts"/>
 		<plugin group="finder" plugin="dt_whatsapp_tenants_blastingswhatsapptenantsscheduledmessages"/>
 		<plugin group="finder" plugin="dt_whatsapp_tenants_blastingswhatsapptenantsmessagehistories"/>
+		<plugin group="finder" plugin="dt_whatsapp_tenants_blastingswhatsapptenantskeywords"/>
     </plugins>
     
 

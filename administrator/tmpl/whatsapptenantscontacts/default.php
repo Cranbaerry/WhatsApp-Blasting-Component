@@ -67,6 +67,12 @@ if (!empty($saveOrder))
 						<th class='left'>
 							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_PHONE_NUMBER', 'a.phone_number', $listDirn, $listOrder); ?>
 						</th>
+						<th class='left'>
+							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_KEYWORDS_TAGS', 'a.keywords_tags', $listDirn, $listOrder); ?>
+						</th>
+						<th class='left'>
+							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_LAST_UPDATED', 'a.last_updated', $listDirn, $listOrder); ?>
+						</th>
 						
 					</tr>
 					</thead>
@@ -106,6 +112,12 @@ if (!empty($saveOrder))
 							</td>
 							<td>
 								<?php echo $item->phone_number; ?>
+							</td>
+							<td>
+								<?php echo $item->keywords_tags; ?>
+							</td>
+							<td>
+								<?php echo $item->last_updated; ?>
 							</td>
 							
 

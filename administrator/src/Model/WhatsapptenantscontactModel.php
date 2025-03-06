@@ -175,6 +175,21 @@ class WhatsapptenantscontactModel extends AdminModel
 
 			$data = $this->item;
 			
+
+			// Support for multiple or not foreign key field: keywords_tags
+			$array = array();
+
+			foreach ((array) $data->keywords_tags as $value)
+			{
+				if (!is_array($value))
+				{
+					$array[] = $value;
+				}
+			}
+			if(!empty($array)){
+
+			$data->keywords_tags = $array;
+			}
 		}
 
 		return $data;

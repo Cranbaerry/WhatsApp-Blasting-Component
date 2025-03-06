@@ -72,6 +72,9 @@ class Router extends RouterView
 			$ccWhatsapptenantscontact = new RouterViewConfiguration('whatsapptenantscontact');
 			$ccWhatsapptenantscontact->setKey('id')->setParent($whatsapptenantscontacts);
 			$this->registerView($ccWhatsapptenantscontact);
+			$whatsapptenantscontactform = new RouterViewConfiguration('whatsapptenantscontactform');
+			$whatsapptenantscontactform->setKey('id');
+			$this->registerView($whatsapptenantscontactform);
 			$whatsapptenantsscheduledmessages = new RouterViewConfiguration('whatsapptenantsscheduledmessages');
 			$this->registerView($whatsapptenantsscheduledmessages);
 			$ccWhatsapptenantsscheduledmessage = new RouterViewConfiguration('whatsapptenantsscheduledmessage');
@@ -82,6 +85,14 @@ class Router extends RouterView
 			$ccWhatsapptenantsmessagehistory = new RouterViewConfiguration('whatsapptenantsmessagehistory');
 			$ccWhatsapptenantsmessagehistory->setKey('id')->setParent($whatsapptenantsmessagehistories);
 			$this->registerView($ccWhatsapptenantsmessagehistory);
+			$whatsapptenantskeywords = new RouterViewConfiguration('whatsapptenantskeywords');
+			$this->registerView($whatsapptenantskeywords);
+			$ccWhatsapptenantskeyword = new RouterViewConfiguration('whatsapptenantskeyword');
+			$ccWhatsapptenantskeyword->setKey('id')->setParent($whatsapptenantskeywords);
+			$this->registerView($ccWhatsapptenantskeyword);
+			$whatsapptenantskeywordform = new RouterViewConfiguration('whatsapptenantskeywordform');
+			$whatsapptenantskeywordform->setKey('id');
+			$this->registerView($whatsapptenantskeywordform);
 
 		parent::__construct($app, $menu);
 
@@ -128,6 +139,18 @@ class Router extends RouterView
 		{
 			return array((int) $id => $id);
 		}
+			/**
+			 * Method to get the segment(s) for an whatsapptenantscontactform
+			 *
+			 * @param   string  $id     ID of the whatsapptenantscontactform to retrieve the segments for
+			 * @param   array   $query  The request that is built right now
+			 *
+			 * @return  array|string  The segments of this item
+			 */
+			public function getWhatsapptenantscontactformSegment($id, $query)
+			{
+				return $this->getWhatsapptenantscontactSegment($id, $query);
+			}
 		/**
 		 * Method to get the segment(s) for an whatsapptenantsscheduledmessage
 		 *
@@ -152,6 +175,30 @@ class Router extends RouterView
 		{
 			return array((int) $id => $id);
 		}
+		/**
+		 * Method to get the segment(s) for an whatsapptenantskeyword
+		 *
+		 * @param   string  $id     ID of the whatsapptenantskeyword to retrieve the segments for
+		 * @param   array   $query  The request that is built right now
+		 *
+		 * @return  array|string  The segments of this item
+		 */
+		public function getWhatsapptenantskeywordSegment($id, $query)
+		{
+			return array((int) $id => $id);
+		}
+			/**
+			 * Method to get the segment(s) for an whatsapptenantskeywordform
+			 *
+			 * @param   string  $id     ID of the whatsapptenantskeywordform to retrieve the segments for
+			 * @param   array   $query  The request that is built right now
+			 *
+			 * @return  array|string  The segments of this item
+			 */
+			public function getWhatsapptenantskeywordformSegment($id, $query)
+			{
+				return $this->getWhatsapptenantskeywordSegment($id, $query);
+			}
 
 	
 		/**
@@ -190,6 +237,18 @@ class Router extends RouterView
 		{
 			return (int) $segment;
 		}
+			/**
+			 * Method to get the segment(s) for an whatsapptenantscontactform
+			 *
+			 * @param   string  $segment  Segment of the whatsapptenantscontactform to retrieve the ID for
+			 * @param   array   $query    The request that is parsed right now
+			 *
+			 * @return  mixed   The id of this item or false
+			 */
+			public function getWhatsapptenantscontactformId($segment, $query)
+			{
+				return $this->getWhatsapptenantscontactId($segment, $query);
+			}
 		/**
 		 * Method to get the segment(s) for an whatsapptenantsscheduledmessage
 		 *
@@ -214,6 +273,30 @@ class Router extends RouterView
 		{
 			return (int) $segment;
 		}
+		/**
+		 * Method to get the segment(s) for an whatsapptenantskeyword
+		 *
+		 * @param   string  $segment  Segment of the whatsapptenantskeyword to retrieve the ID for
+		 * @param   array   $query    The request that is parsed right now
+		 *
+		 * @return  mixed   The id of this item or false
+		 */
+		public function getWhatsapptenantskeywordId($segment, $query)
+		{
+			return (int) $segment;
+		}
+			/**
+			 * Method to get the segment(s) for an whatsapptenantskeywordform
+			 *
+			 * @param   string  $segment  Segment of the whatsapptenantskeywordform to retrieve the ID for
+			 * @param   array   $query    The request that is parsed right now
+			 *
+			 * @return  mixed   The id of this item or false
+			 */
+			public function getWhatsapptenantskeywordformId($segment, $query)
+			{
+				return $this->getWhatsapptenantskeywordId($segment, $query);
+			}
 
 	/**
 	 * Method to get categories from cache

@@ -49,6 +49,8 @@ class WhatsapptenantscontactsModel extends ListModel
 				'modified_by', 'a.modified_by',
 				'name', 'a.name',
 				'phone_number', 'a.phone_number',
+				'keywords_tags', 'a.keywords_tags',
+				'last_updated', 'a.last_updated',
 			);
 		}
 
@@ -190,6 +192,12 @@ class WhatsapptenantscontactsModel extends ListModel
 			}
 			
 
+		// Filtering keywords_tags
+		$filter_keywords_tags = $this->state->get("filter.keywords_tags");
+		if ($filter_keywords_tags != '') {
+			$query->where('FIND_IN_SET(' . $db->quote($filter_keywords_tags) . ', ' . $db->quoteName('a.keywords_tags') . ')');
+		}
+
 			
 			
 			// Add the list ordering clause.
@@ -213,6 +221,34 @@ class WhatsapptenantscontactsModel extends ListModel
 	{
 		$items = parent::getItems();
 		
+		foreach ($items as $item)
+		{
+
+			if (isset($item->keywords_tags))
+			{
+				$values    = explode(',', $item->keywords_tags);
+				$textValue = array();
+
+				foreach ($values as $value)
+				{
+					if (!empty($value))
+					{
+						$db    = $this->getDbo();
+						$query = "SELECT * FROM #__dt_whatsapp_tenants_keywords WHERE id = '$value' ";
+
+						$db->setQuery($query);
+						$results = $db->loadObject();
+
+						if ($results)
+						{
+							$textValue[] = $results->name;
+						}
+					}
+				}
+
+				$item->keywords_tags = !empty($textValue) ? implode(', ', $textValue) : $item->keywords_tags;
+			}
+		}
 
 		return $items;
 	}

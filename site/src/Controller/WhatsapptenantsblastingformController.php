@@ -153,10 +153,10 @@ class WhatsapptenantsblastingformController extends FormController
 				->where($db->qn('created_by') . ' = ' . (int) $currentUserId);
 			$db->setQuery($query);
 			$existingId = $db->loadResult();
-
 			if ($existingId) {
 				$columns = [
-					$db->qn('name') . ' = ' . $db->q($name)
+					$db->qn('name') . ' = ' . $db->q($name),
+					$db->qn('last_updated') . ' = ' . $db->q(date('Y-m-d H:i:s'))
 				];
 				$query = $db->getQuery(true)
 					->update($db->qn('#__dt_whatsapp_tenants_contacts'))
@@ -166,14 +166,15 @@ class WhatsapptenantsblastingformController extends FormController
 				$db->setQuery($query);
 				$result = $db->execute();
 			} else {
-				$columns = ['phone_number', 'name', 'created_by'];
+				$columns = ['phone_number', 'name', 'created_by', 'last_updated'];
 				$query = $db->getQuery(true)
 					->insert($db->qn('#__dt_whatsapp_tenants_contacts'))
 					->columns(implode(', ', array_map([$db, 'qn'], $columns)))
 					->values(implode(', ', [
 						$db->q($phone),
 						$db->q($name),
-						$db->q($currentUserId)
+						$db->q($currentUserId),
+						$db->q(date('Y-m-d H:i:s'))
 					]));
 				$db->setQuery($query);
 				$result = $db->execute();

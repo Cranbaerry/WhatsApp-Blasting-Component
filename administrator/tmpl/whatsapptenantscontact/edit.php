@@ -35,6 +35,8 @@ HTMLHelper::_('bootstrap.tooltip');
 				<legend><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FIELDSET_WHATSAPPTENANTSCONTACT'); ?></legend>
 				<?php echo $this->form->renderField('name'); ?>
 				<?php echo $this->form->renderField('phone_number'); ?>
+				<?php echo $this->form->renderField('keywords_tags'); ?>
+				<?php echo $this->form->renderField('last_updated'); ?>
 			</fieldset>
 		</div>
 	</div>

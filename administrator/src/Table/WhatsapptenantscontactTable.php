@@ -106,6 +106,32 @@ class WhatsapptenantscontactTable extends Table implements VersionableTableInter
 			$array['modified_by'] = Factory::getUser()->id;
 		}
 
+		// Support for multiple field: keywords_tags
+		if (isset($array['keywords_tags']))
+		{
+			if (is_array($array['keywords_tags']))
+			{
+				$array['keywords_tags'] = implode(',',$array['keywords_tags']);
+			}
+			elseif (strpos($array['keywords_tags'], ',') != false)
+			{
+				$array['keywords_tags'] = explode(',',$array['keywords_tags']);
+			}
+			elseif (strlen($array['keywords_tags']) == 0)
+			{
+				$array['keywords_tags'] = '';
+			}
+		}
+		else
+		{
+			$array['keywords_tags'] = '';
+		}
+
+		if ($task == 'apply' || $task == 'save')
+		{
+			$array['last_updated'] = $date->toSql();
+		}
+
 		if (isset($array['params']) && is_array($array['params']))
 		{
 			$registry = new Registry;

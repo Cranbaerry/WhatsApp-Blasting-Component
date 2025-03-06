@@ -58,6 +58,14 @@ $wa->useStyle('com_dt_whatsapp_tenants_blastings.list');
 						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_PHONE_NUMBER', 'a.phone_number', $listDirn, $listOrder); ?>
 					</th>
 
+					<th class=''>
+						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_KEYWORDS_TAGS', 'a.keywords_tags', $listDirn, $listOrder); ?>
+					</th>
+
+					<th class=''>
+						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_LAST_UPDATED', 'a.last_updated', $listDirn, $listOrder); ?>
+					</th>
+
 						<?php if ($canEdit || $canDelete): ?>
 					<th class="center">
 						<?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSCONTACTS_ACTIONS'); ?>
@@ -78,7 +86,10 @@ $wa->useStyle('com_dt_whatsapp_tenants_blastings.list');
 			<tbody>
 			<?php foreach ($this->items as $i => $item) : ?>
 				<?php $canEdit = $user->authorise('core.edit', 'com_dt_whatsapp_tenants_blastings'); ?>
-				
+				<?php if (!$canEdit && $user->authorise('core.edit.own', 'com_dt_whatsapp_tenants_blastings')): ?>
+				<?php $canEdit = Factory::getApplication()->getIdentity()->id == $item->created_by; ?>
+				<?php endif; ?>
+
 				<tr class="row<?php echo $i % 2; ?>">
 					
 					<td>
@@ -93,8 +104,22 @@ $wa->useStyle('com_dt_whatsapp_tenants_blastings.list');
 					<td>
 						<?php echo $item->phone_number; ?>
 					</td>
+					<td>
+						<?php echo $item->keywords_tags; ?>
+					</td>
+					<td>
+						<?php echo $item->last_updated; ?>
+					</td>
 					<?php if ($canEdit || $canDelete): ?>
 						<td class="center">
+							<?php $canCheckin = Factory::getApplication()->getIdentity()->authorise('core.manage', 'com_dt_whatsapp_tenants_blastings.' . $item->id) || $item->checked_out == Factory::getApplication()->getIdentity()->id; ?>
+
+							<?php if($canEdit && $item->checked_out == 0): ?>
+								<a href="<?php echo Route::_('index.php?option=com_dt_whatsapp_tenants_blastings&task=whatsapptenantscontact.edit&id=' . $item->id, false, 2); ?>" class="btn btn-mini" type="button"><i class="icon-edit" ></i></a>
+							<?php endif; ?>
+							<?php if ($canDelete): ?>
+								<a href="<?php echo Route::_('index.php?option=com_dt_whatsapp_tenants_blastings&task=whatsapptenantscontactform.remove&id=' . $item->id, false, 2); ?>" class="btn btn-mini delete-button" type="button"><i class="icon-trash" ></i></a>
+							<?php endif; ?>
 						</td>
 					<?php endif; ?>
 

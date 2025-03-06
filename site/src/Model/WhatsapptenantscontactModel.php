@@ -199,6 +199,34 @@ class WhatsapptenantscontactModel extends ItemModel
 			$this->_item->modified_by_name = $user->name;
 		}
 
+		if (isset($this->_item->keywords_tags) && $this->_item->keywords_tags != '')
+		{
+			if (is_object($this->_item->keywords_tags))
+			{
+				$this->_item->keywords_tags = ArrayHelper::fromObject($this->_item->keywords_tags);
+			}
+
+			$values = (is_array($this->_item->keywords_tags)) ? $this->_item->keywords_tags : explode(',',$this->_item->keywords_tags);
+
+			$textValue = array();
+
+			foreach ($values as $value)
+			{
+				$db    = $this->getDbo();
+				$query = "SELECT * FROM #__dt_whatsapp_tenants_keywords WHERE id = '$value' ";
+
+				$db->setQuery($query);
+				$results = $db->loadObject();
+
+				if ($results)
+				{
+					$textValue[] = $results->name;
+				}
+			}
+
+			$this->_item->keywords_tags = !empty($textValue) ? implode(', ', $textValue) : $this->_item->keywords_tags;
+		}
+
 		return $this->_item;
 	}
 	

@@ -47,6 +47,8 @@ class WhatsapptenantscontactsModel extends ListModel
 				'modified_by', 'a.modified_by',
 				'name', 'a.name',
 				'phone_number', 'a.phone_number',
+				'keywords_tags', 'a.keywords_tags',
+				'last_updated', 'a.last_updated',
 			);
 		}
 
@@ -250,10 +252,18 @@ class WhatsapptenantscontactsModel extends ListModel
 			else
 			{
 				$search = $db->Quote('%' . $db->escape($search, true) . '%');
-				$query->where('( a.name LIKE ' . $search . '  OR  a.phone_number LIKE ' . $search . ' )');
+				$query->where('( a.name LIKE ' . $search . '  OR  a.phone_number LIKE ' . $search . '  OR  a.keywords_tags LIKE ' . $search . ' )');
 			}
 		}
 		
+
+		// Filtering keywords_tags
+		$filter_keywords_tags = $this->state->get("filter.keywords_tags");
+
+		if ($filter_keywords_tags !== null && (is_numeric($filter_keywords_tags) || !empty($filter_keywords_tags)))
+		{
+			$query->where('FIND_IN_SET(' . $db->quote($filter_keywords_tags) . ', ' . $db->quoteName('a.keywords_tags') . ')');
+		}
 		// Add the list ordering clause.
 		$orderCol  = $this->state->get('list.ordering', 'id');
 		$orderDirn = $this->state->get('list.direction', 'ASC');
@@ -275,6 +285,33 @@ class WhatsapptenantscontactsModel extends ListModel
 	{
 		$items = parent::getItems();
 		
+		foreach ($items as $oneItem)
+		{
+
+			if (isset($oneItem->keywords_tags))
+			{
+				$values    = explode(',', $oneItem->keywords_tags);
+				$textValue = array();
+
+				foreach ($values as $value)
+				{
+					if (!empty($value))
+					{
+						$db = $this->getDbo();
+						$query = "SELECT * FROM #__dt_whatsapp_tenants_keywords WHERE id = '$value' ";
+						$db->setQuery($query);
+						$results = $db->loadObject();
+
+						if ($results)
+						{
+							$textValue[] = $results->name;
+						}
+					}
+				}
+
+				$oneItem->keywords_tags = !empty($textValue) ? implode(', ', $textValue) : $oneItem->keywords_tags;
+			}
+		}
 
 		return $items;
 	}
