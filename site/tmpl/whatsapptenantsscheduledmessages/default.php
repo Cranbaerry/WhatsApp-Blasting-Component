@@ -59,12 +59,22 @@ $wa->useStyle('com_dt_whatsapp_tenants_blastings.list');
 					</th>
 
 					<th class=''>
+						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_KEYWORD_ID', 'a.keyword_id', $listDirn, $listOrder); ?>
+					</th>
+
+					<th class=''>
 						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_STATUS', 'a.status', $listDirn, $listOrder); ?>
 					</th>
 
 					<th class=''>
-						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_BLASTING_ID', 'a.blasting_id', $listDirn, $listOrder); ?>
+						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_SCHEDULED_TIME', 'a.scheduled_time', $listDirn, $listOrder); ?>
 					</th>
+
+						<?php if ($canEdit || $canDelete): ?>
+					<th class="center">
+						<?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_ACTIONS'); ?>
+					</th>
+					<?php endif; ?>
 
 			</tr>
 			</thead>
@@ -96,11 +106,19 @@ $wa->useStyle('com_dt_whatsapp_tenants_blastings.list');
 						<?php echo $item->template_id; ?>
 					</td>
 					<td>
+						<?php echo $item->keyword_id; ?>
+					</td>
+					<td>
 						<?php echo $item->status; ?>
 					</td>
 					<td>
-						<?php echo $item->blasting_id; ?>
+						<?php echo $item->scheduled_time; ?>
 					</td>
+					<?php if ($canEdit || $canDelete): ?>
+						<td class="center">
+						</td>
+					<?php endif; ?>
+
 				</tr>
 			<?php endforeach; ?>
 			</tbody>

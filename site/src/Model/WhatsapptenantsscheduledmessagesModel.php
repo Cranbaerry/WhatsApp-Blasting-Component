@@ -47,11 +47,14 @@ class WhatsapptenantsscheduledmessagesModel extends ListModel
 				'ordering', 'a.ordering',
 				'created_by', 'a.created_by',
 				'modified_by', 'a.modified_by',
+				'keyword_id', 'a.keyword_id',
 				'target_phone_number', 'a.target_phone_number',
+				'type', 'a.type',
 				'template_id', 'a.template_id',
 				'blasting_id', 'a.blasting_id',
 				'status', 'a.status',
 				'raw_response', 'a.raw_response',
+				'scheduled_time', 'a.scheduled_time',
 			);
 		}
 
@@ -163,11 +166,14 @@ class WhatsapptenantsscheduledmessagesModel extends ListModel
 
 		// Join over the created by field 'modified_by'
 		$query->join('LEFT', '#__users AS modified_by ON modified_by.id = a.modified_by');
+		// Join over the foreign key 'keyword_id'
+		$query->select('`#__dt_whatsapp_tenants_keywords_4169744`.`name` AS whatsapptenantskeywords_fk_value_4169744');
+		$query->join('LEFT', '#__dt_whatsapp_tenants_keywords AS #__dt_whatsapp_tenants_keywords_4169744 ON #__dt_whatsapp_tenants_keywords_4169744.`id` = a.`keyword_id`');
 		// Join over the foreign key 'template_id'
 		$query->select('`#__dt_whatsapp_tenants_templates_4168298`.`name` AS #__dt_whatsapp_tenants_templates_fk_value_4168298');
 		$query->join('LEFT', '#__dt_whatsapp_tenants_templates AS #__dt_whatsapp_tenants_templates_4168298 ON #__dt_whatsapp_tenants_templates_4168298.`id` = a.`template_id`');
 		// Join over the foreign key 'blasting_id'
-		$query->select('`#__dt_whatsapp_tenants_blastings_4168833`.`scheduled_time` AS whatsapptenantsblastings_fk_value_4168833');
+		$query->select('`#__dt_whatsapp_tenants_blastings_4168833`.`id` AS whatsapptenantsblastings_fk_value_4168833');
 		$query->join('LEFT', '#__dt_whatsapp_tenants_blastings AS #__dt_whatsapp_tenants_blastings_4168833 ON #__dt_whatsapp_tenants_blastings_4168833.`id` = a.`blasting_id`');
 		if(!$this->isAdminOrSuperUser()){
 			$query->where("a.created_by = " . Factory::getApplication()->getIdentity()->get("id"));
@@ -207,14 +213,6 @@ class WhatsapptenantsscheduledmessagesModel extends ListModel
 			$query->where("a.`template_id` = '".$db->escape($filter_template_id)."'");
 		}
 
-		// Filtering blasting_id
-		$filter_blasting_id = $this->state->get("filter.blasting_id");
-
-		if ($filter_blasting_id)
-		{
-			$query->where("a.`blasting_id` = '".$db->escape($filter_blasting_id)."'");
-		}
-
 			
 			
 			// Add the list ordering clause.
@@ -240,6 +238,39 @@ class WhatsapptenantsscheduledmessagesModel extends ListModel
 		
 		foreach ($items as $item)
 		{
+
+			if (isset($item->keyword_id))
+			{
+
+				$values    = explode(',', $item->keyword_id);
+				$textValue = array();
+
+				foreach ($values as $value)
+				{
+					$db    = $this->getDbo();
+					$query = $db->getQuery(true);
+					$query
+						->select('`#__dt_whatsapp_tenants_keywords_4169744`.`name`')
+						->from($db->quoteName('#__dt_whatsapp_tenants_keywords', '#__dt_whatsapp_tenants_keywords_4169744'))
+						->where($db->quoteName('#__dt_whatsapp_tenants_keywords_4169744.id') . ' = '. $db->quote($db->escape($value)));
+
+					$db->setQuery($query);
+					$results = $db->loadObject();
+
+					if ($results)
+					{
+						$textValue[] = $results->name;
+					}
+				}
+
+				$item->keyword_id = !empty($textValue) ? implode(', ', $textValue) : $item->keyword_id;
+			}
+
+
+				if (!empty($item->type))
+					{
+						$item->type = Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_TYPE_OPTION_' . preg_replace('/[^A-Za-z0-9\_-]/', '',strtoupper(str_replace(' ', '_',$item->type))));
+					}
 
 			if (isset($item->template_id))
 			{
@@ -280,7 +311,7 @@ class WhatsapptenantsscheduledmessagesModel extends ListModel
 					$db    = $this->getDbo();
 					$query = $db->getQuery(true);
 					$query
-						->select('`#__dt_whatsapp_tenants_blastings_4168833`.`scheduled_time`')
+						->select('`#__dt_whatsapp_tenants_blastings_4168833`.`id`')
 						->from($db->quoteName('#__dt_whatsapp_tenants_blastings', '#__dt_whatsapp_tenants_blastings_4168833'))
 						->where($db->quoteName('#__dt_whatsapp_tenants_blastings_4168833.id') . ' = '. $db->quote($db->escape($value)));
 
@@ -289,7 +320,7 @@ class WhatsapptenantsscheduledmessagesModel extends ListModel
 
 					if ($results)
 					{
-						$textValue[] = $results->scheduled_time;
+						$textValue[] = $results->id;
 					}
 				}
 

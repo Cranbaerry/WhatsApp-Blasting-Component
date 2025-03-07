@@ -1,7 +1,6 @@
 CREATE TABLE IF NOT EXISTS `#__dt_whatsapp_tenants_blastings` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 
-`type` VARCHAR(255)  NOT NULL  DEFAULT "TEMPLATE",
 `status` VARCHAR(255)  NULL  DEFAULT "QUEUED",
 `state` TINYINT(1)  NULL  DEFAULT 1,
 `ordering` INT(11)  NULL  DEFAULT 0,
@@ -9,7 +8,6 @@ CREATE TABLE IF NOT EXISTS `#__dt_whatsapp_tenants_blastings` (
 `checked_out_time` DATETIME NULL  DEFAULT NULL ,
 `created_by` INT(11)  NULL  DEFAULT 0,
 `modified_by` INT(11)  NULL  DEFAULT 0,
-`keyword_id` VARCHAR(255)  NULL  DEFAULT "",
 `template_id` VARCHAR(255)  NULL  DEFAULT "",
 `mode` VARCHAR(255)  NOT NULL  DEFAULT "INSTANT",
 `scheduled_time` DATETIME NULL  DEFAULT NULL ,
@@ -21,8 +19,6 @@ PRIMARY KEY (`id`)
 ) DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 CREATE INDEX `#__dt_whatsapp_tenants_blastings_status` ON `#__dt_whatsapp_tenants_blastings`(`status`);
-
-CREATE INDEX `#__dt_whatsapp_tenants_blastings_keyword_id` ON `#__dt_whatsapp_tenants_blastings`(`keyword_id`);
 
 CREATE INDEX `#__dt_whatsapp_tenants_blastings_template_id` ON `#__dt_whatsapp_tenants_blastings`(`template_id`);
 
@@ -61,11 +57,14 @@ CREATE TABLE IF NOT EXISTS `#__dt_whatsapp_tenants_scheduled_messages` (
 `checked_out_time` DATETIME NULL  DEFAULT NULL ,
 `created_by` INT(11)  NULL  DEFAULT 0,
 `modified_by` INT(11)  NULL  DEFAULT 0,
+`keyword_id` INT(10)  NULL  DEFAULT 0,
 `target_phone_number` VARCHAR(255)  NOT NULL ,
+`type` VARCHAR(255)  NULL  DEFAULT "TEMPLATE",
 `template_id` VARCHAR(255)  NOT NULL ,
 `blasting_id` INT(10)  NULL  DEFAULT 0,
 `status` VARCHAR(255)  NULL  DEFAULT "",
 `raw_response` TEXT NULL ,
+`scheduled_time` DATETIME NULL  DEFAULT NULL ,
 PRIMARY KEY (`id`)
 ,KEY `idx_state` (`state`)
 ,KEY `idx_checked_out` (`checked_out`)
@@ -73,11 +72,15 @@ PRIMARY KEY (`id`)
 ,KEY `idx_modified_by` (`modified_by`)
 ) DEFAULT COLLATE=utf8mb4_unicode_ci;
 
+CREATE INDEX `#__dt_whatsapp_tenants_scheduled_messages_keyword_id` ON `#__dt_whatsapp_tenants_scheduled_messages`(`keyword_id`);
+
 CREATE INDEX `#__dt_whatsapp_tenants_scheduled_messages_template_id` ON `#__dt_whatsapp_tenants_scheduled_messages`(`template_id`);
 
 CREATE INDEX `#__dt_whatsapp_tenants_scheduled_messages_blasting_id` ON `#__dt_whatsapp_tenants_scheduled_messages`(`blasting_id`);
 
 CREATE INDEX `#__dt_whatsapp_tenants_scheduled_messages_status` ON `#__dt_whatsapp_tenants_scheduled_messages`(`status`);
+
+CREATE INDEX `#__dt_whatsapp_tenants_scheduled_messages_scheduled_time` ON `#__dt_whatsapp_tenants_scheduled_messages`(`scheduled_time`);
 
 CREATE TABLE IF NOT EXISTS `#__dt_whatsapp_tenants_message_history` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,

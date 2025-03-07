@@ -51,15 +51,7 @@ $wa->useStyle('com_dt_whatsapp_tenants_blastings.list');
 			<tr>
 				
 					<th class=''>
-						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSBLASTINGS_TYPE', 'a.type', $listDirn, $listOrder); ?>
-					</th>
-
-					<th class=''>
 						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSBLASTINGS_TEMPLATE_ID', 'a.template_id', $listDirn, $listOrder); ?>
-					</th>
-
-					<th class=''>
-						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSBLASTINGS_KEYWORD_ID', 'a.keyword_id', $listDirn, $listOrder); ?>
 					</th>
 
 					<th class=''>
@@ -101,22 +93,16 @@ $wa->useStyle('com_dt_whatsapp_tenants_blastings.list');
 				<tr class="row<?php echo $i % 2; ?>">
 					
 					<td>
+						<?php echo $item->template_id; ?>
+					</td>
+					<td>
 						<?php $canCheckin = Factory::getApplication()->getIdentity()->authorise('core.manage', 'com_dt_whatsapp_tenants_blastings.' . $item->id) || $item->checked_out == Factory::getApplication()->getIdentity()->id; ?>
 						<?php if($canCheckin && $item->checked_out > 0) : ?>
 							<a href="<?php echo Route::_('index.php?option=com_dt_whatsapp_tenants_blastings&task=whatsapptenantsblasting.checkin&id=' . $item->id .'&'. Session::getFormToken() .'=1'); ?>">
 							<?php echo HTMLHelper::_('jgrid.checkedout', $i, $item->uEditor, $item->checked_out_time, 'whatsapptenantsblasting.', false); ?></a>
 						<?php endif; ?>
 						<a href="<?php echo Route::_('index.php?option=com_dt_whatsapp_tenants_blastings&view=whatsapptenantsblasting&id='.(int) $item->id); ?>">
-							<?php echo $this->escape($item->type); ?></a>
-					</td>
-					<td>
-						<?php echo $item->template_id; ?>
-					</td>
-					<td>
-						<?php echo $item->keyword_id; ?>
-					</td>
-					<td>
-						<?php echo $item->status; ?>
+							<?php echo $this->escape($item->status); ?></a>
 					</td>
 					<td>
 						<?php echo $item->mode; ?>

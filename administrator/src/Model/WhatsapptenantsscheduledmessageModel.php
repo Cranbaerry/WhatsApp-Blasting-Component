@@ -175,6 +175,21 @@ class WhatsapptenantsscheduledmessageModel extends AdminModel
 
 			$data = $this->item;
 			
+
+			// Support for multiple or not foreign key field: type
+			$array = array();
+
+			foreach ((array) $data->type as $value)
+			{
+				if (!is_array($value))
+				{
+					$array[] = $value;
+				}
+			}
+			if(!empty($array)){
+
+			$data->type = $array;
+			}
 		}
 
 		return $data;
@@ -256,6 +271,18 @@ class WhatsapptenantsscheduledmessageModel extends AdminModel
 						throw new \Exception($table->getError());
 					}
 					
+				if (!empty($table->keyword_id))
+				{
+					if (is_array($table->keyword_id))
+					{
+						$table->keyword_id = implode(',', $table->keyword_id);
+					}
+				}
+				else
+				{
+					$table->keyword_id = '';
+				}
+
 				if (!empty($table->template_id))
 				{
 					if (is_array($table->template_id))

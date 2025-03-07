@@ -36,6 +36,18 @@ use Joomla\Utilities\ArrayHelper;
 		</tr>
 
 		<tr>
+			<th><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSSCHEDULEDMESSAGE_TYPE'); ?></th>
+			<td>
+			<?php
+
+			if (!empty($this->item->type) || $this->item->type === 0)
+			{
+				echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_TYPE_OPTION_' . preg_replace('/[^A-Za-z0-9\_-]/', '',strtoupper(str_replace(' ', '_',$this->item->type))));
+			}
+			?></td>
+		</tr>
+
+		<tr>
 			<th><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSSCHEDULEDMESSAGE_TEMPLATE_ID'); ?></th>
 			<td><?php echo $this->item->template_id; ?></td>
 		</tr>
@@ -53,6 +65,11 @@ use Joomla\Utilities\ArrayHelper;
 		<tr>
 			<th><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSSCHEDULEDMESSAGE_RAW_RESPONSE'); ?></th>
 			<td><?php echo nl2br($this->item->raw_response); ?></td>
+		</tr>
+
+		<tr>
+			<th><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSSCHEDULEDMESSAGE_SCHEDULED_TIME'); ?></th>
+			<td><?php echo $this->item->scheduled_time; ?></td>
 		</tr>
 
 	</table>

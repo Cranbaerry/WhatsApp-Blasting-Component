@@ -106,6 +106,41 @@ class WhatsapptenantsscheduledmessageTable extends Table implements VersionableT
 			$array['modified_by'] = Factory::getUser()->id;
 		}
 
+		// Support for multiple or not foreign key field: keyword_id
+			if(!empty($array['keyword_id']))
+			{
+				if(is_array($array['keyword_id'])){
+					$array['keyword_id'] = implode(',',$array['keyword_id']);
+				}
+				else if(strrpos($array['keyword_id'], ',') != false){
+					$array['keyword_id'] = explode(',',$array['keyword_id']);
+				}
+			}
+			else {
+				$array['keyword_id'] = 0;
+			}
+
+		// Support for multiple field: type
+		if (isset($array['type']))
+		{
+			if (is_array($array['type']))
+			{
+				$array['type'] = implode(',',$array['type']);
+			}
+			elseif (strpos($array['type'], ',') != false)
+			{
+				$array['type'] = explode(',',$array['type']);
+			}
+			elseif (strlen($array['type']) == 0)
+			{
+				$array['type'] = '';
+			}
+		}
+		else
+		{
+			$array['type'] = '';
+		}
+
 		// Support for multiple or not foreign key field: template_id
 			if(!empty($array['template_id']))
 			{

@@ -76,10 +76,13 @@ if (!empty($saveOrder))
 							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_TEMPLATE_ID', 'a.template_id', $listDirn, $listOrder); ?>
 						</th>
 						<th class='left'>
+							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_KEYWORD_ID', 'a.keyword_id', $listDirn, $listOrder); ?>
+						</th>
+						<th class='left'>
 							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_STATUS', 'a.status', $listDirn, $listOrder); ?>
 						</th>
 						<th class='left'>
-							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_BLASTING_ID', 'a.blasting_id', $listDirn, $listOrder); ?>
+							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_SCHEDULED_TIME', 'a.scheduled_time', $listDirn, $listOrder); ?>
 						</th>
 						
 					</tr>
@@ -150,10 +153,13 @@ if (!empty($saveOrder))
 								<?php echo $item->template_id; ?>
 							</td>
 							<td>
+								<?php echo $item->keyword_id; ?>
+							</td>
+							<td>
 								<?php echo $item->status; ?>
 							</td>
 							<td>
-								<?php echo $item->blasting_id; ?>
+								<?php echo $item->scheduled_time; ?>
 							</td>
 							
 

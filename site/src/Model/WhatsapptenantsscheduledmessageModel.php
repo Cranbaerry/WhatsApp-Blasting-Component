@@ -199,6 +199,40 @@ class WhatsapptenantsscheduledmessageModel extends ItemModel
 			$this->_item->modified_by_name = $user->name;
 		}
 
+		if (isset($this->_item->keyword_id) && $this->_item->keyword_id != '')
+		{
+			if (is_object($this->_item->keyword_id))
+			{
+				$this->_item->keyword_id = ArrayHelper::fromObject($this->_item->keyword_id);
+			}
+
+			$values = (is_array($this->_item->keyword_id)) ? $this->_item->keyword_id : explode(',',$this->_item->keyword_id);
+
+			$textValue = array();
+
+			foreach ($values as $value)
+			{
+				$db    = $this->getDbo();
+				$query = $db->getQuery(true);
+
+				$query
+					->select('`#__dt_whatsapp_tenants_keywords_4169744`.`name`')
+					->from($db->quoteName('#__dt_whatsapp_tenants_keywords', '#__dt_whatsapp_tenants_keywords_4169744'))
+					->where($db->quoteName('id') . ' = ' . $db->quote($value));
+
+				$db->setQuery($query);
+				$results = $db->loadObject();
+
+				if ($results)
+				{
+					$textValue[] = $results->name;
+				}
+			}
+
+			$this->_item->keyword_id = !empty($textValue) ? implode(', ', $textValue) : $this->_item->keyword_id;
+
+		}
+
 		if (isset($this->_item->template_id) && $this->_item->template_id != '')
 		{
 			if (is_object($this->_item->template_id))
@@ -250,7 +284,7 @@ class WhatsapptenantsscheduledmessageModel extends ItemModel
 				$query = $db->getQuery(true);
 
 				$query
-					->select('`#__dt_whatsapp_tenants_blastings_4168833`.`scheduled_time`')
+					->select('`#__dt_whatsapp_tenants_blastings_4168833`.`id`')
 					->from($db->quoteName('#__dt_whatsapp_tenants_blastings', '#__dt_whatsapp_tenants_blastings_4168833'))
 					->where($db->quoteName('id') . ' = ' . $db->quote($value));
 
@@ -259,7 +293,7 @@ class WhatsapptenantsscheduledmessageModel extends ItemModel
 
 				if ($results)
 				{
-					$textValue[] = $results->scheduled_time;
+					$textValue[] = $results->id;
 				}
 			}
 

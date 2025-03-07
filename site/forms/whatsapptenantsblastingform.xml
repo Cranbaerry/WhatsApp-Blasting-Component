@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form addfieldprefix="Comdtwhatsapptenantsblastings\Component\Dt_whatsapp_tenants_blastings\Site\Field">
   <fieldset>
-    <field name="type" default="TEMPLATE" type="list" required="true" label="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSBLASTING_TYPE" description="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_DESC_WHATSAPPTENANTSBLASTING_TYPE" hidden="true" hint="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSBLASTING_TYPE">
-      <option value="TEMPLATE">COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSBLASTINGS_TYPE_OPTION_TEMPLATE</option>
-      <option value="MESSAGE">COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSBLASTINGS_TYPE_OPTION_MESSAGE</option>
-    </field>
     <field name="id" type="text" readonly="true" class="readonly" default="0" description="JGLOBAL_FIELD_ID_DESC"/>
     <field name="status" default="QUEUED" filter="safehtml" type="text" readonly="true" label="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSBLASTING_STATUS" description="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_DESC_WHATSAPPTENANTSBLASTING_STATUS" hidden="true" hint="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSBLASTING_STATUS"/>
     <field name="state" default="1" type="list" label="JSTATUS" description="JFIELD_PUBLISHED_DESC" class="inputbox" size="1">
@@ -16,7 +12,6 @@
     <field name="ordering"/>
     <field name="checked_out" type="hidden" filter="unset"/>
     <field name="checked_out_time" type="hidden" filter="unset"/>
-    <field name="keyword_id" type="foreignkey" label="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSBLASTING_KEYWORD_ID" description="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_DESC_WHATSAPPTENANTSBLASTING_KEYWORD_ID" default="0" input_type="list" table="#__dt_whatsapp_tenants_keywords" key_field="name" translate="true" value_field="name"/>
     <field name="template_id" type="foreignkey" label="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSBLASTING_TEMPLATE_ID" description="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_DESC_WHATSAPPTENANTSBLASTING_TEMPLATE_ID" option_key_field="" option_value_field="- Select Template -" default="" input_type="list" table="#__dt_whatsapp_tenants_templates" key_field="id" translate="true" value_field="name"/>
     <field name="mode" default="INSTANT" type="list" required="true" label="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSBLASTING_MODE" description="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_DESC_WHATSAPPTENANTSBLASTING_MODE" hint="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSBLASTING_MODE">
       <option value="INSTANT">COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSBLASTINGS_MODE_OPTION_INSTANT</option>
