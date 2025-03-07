@@ -158,6 +158,7 @@ class HtmlView extends BaseHtmlView
 			'a.`created_date`' => Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSKEYWORDS_CREATED_DATE'),
 			'a.`name`' => Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSKEYWORDS_NAME'),
 			'a.`state`' => Text::_('JSTATUS'),
+			'a.`scheduled_message_json`' => Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSKEYWORDS_SCHEDULED_MESSAGE_JSON'),
 		);
 	}
 

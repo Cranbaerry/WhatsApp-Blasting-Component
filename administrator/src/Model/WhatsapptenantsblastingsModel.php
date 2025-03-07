@@ -40,12 +40,14 @@ class WhatsapptenantsblastingsModel extends ListModel
 		if (empty($config['filter_fields']))
 		{
 			$config['filter_fields'] = array(
+				'type', 'a.type',
 				'id', 'a.id',
 				'status', 'a.status',
 				'state', 'a.state',
 				'ordering', 'a.ordering',
 				'created_by', 'a.created_by',
 				'modified_by', 'a.modified_by',
+				'keyword_id', 'a.keyword_id',
 				'template_id', 'a.template_id',
 				'mode', 'a.mode',
 				'scheduled_time', 'a.scheduled_time',
@@ -226,6 +228,9 @@ class WhatsapptenantsblastingsModel extends ListModel
 		// Join over the user field 'modified_by'
 		$query->select('`modified_by`.name AS `modified_by`');
 		$query->join('LEFT', '#__users AS `modified_by` ON `modified_by`.id = a.`modified_by`');
+		// Join over the foreign key 'keyword_id'
+		$query->select('`#__dt_whatsapp_tenants_keywords_4169679`.`name` AS whatsapptenantskeywords_fk_value_4169679');
+		$query->join('LEFT', '#__dt_whatsapp_tenants_keywords AS #__dt_whatsapp_tenants_keywords_4169679 ON #__dt_whatsapp_tenants_keywords_4169679.`name` = a.`keyword_id`');
 		// Join over the foreign key 'template_id'
 		$query->select('`#__dt_whatsapp_tenants_templates_4168267`.`name` AS #__dt_whatsapp_tenants_templates_fk_value_4168267');
 		$query->join('LEFT', '#__dt_whatsapp_tenants_templates AS #__dt_whatsapp_tenants_templates_4168267 ON #__dt_whatsapp_tenants_templates_4168267.`id` = a.`template_id`');
@@ -255,10 +260,18 @@ class WhatsapptenantsblastingsModel extends ListModel
 			else
 			{
 				$search = $db->Quote('%' . $db->escape($search, true) . '%');
-				$query->where('( a.status LIKE ' . $search . '  OR #__dt_whatsapp_tenants_templates_4168267.name LIKE ' . $search . '  OR  a.mode LIKE ' . $search . '  OR  a.scheduled_time LIKE ' . $search . ' )');
+				$query->where('( a.status LIKE ' . $search . '  OR #__dt_whatsapp_tenants_keywords_4169679.name LIKE ' . $search . '  OR #__dt_whatsapp_tenants_templates_4168267.name LIKE ' . $search . '  OR  a.mode LIKE ' . $search . '  OR  a.scheduled_time LIKE ' . $search . ' )');
 			}
 		}
 		
+
+		// Filtering type
+		$filter_type = $this->state->get("filter.type");
+
+		if ($filter_type !== null && (is_numeric($filter_type) || !empty($filter_type)))
+		{
+			$query->where("a.`type` = '".$db->escape($filter_type)."'");
+		}
 
 		// Filtering template_id
 		$filter_template_id = $this->state->get("filter.template_id");
@@ -298,6 +311,33 @@ class WhatsapptenantsblastingsModel extends ListModel
 		
 		foreach ($items as $oneItem)
 		{
+					$oneItem->type = !empty($oneItem->type) ? Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSBLASTINGS_TYPE_OPTION_' . preg_replace('/[^A-Za-z0-9\_-]/', '',strtoupper(str_replace(' ', '_',$oneItem->type)))) : '';
+
+			if (isset($oneItem->keyword_id))
+			{
+				$values    = explode(',', $oneItem->keyword_id);
+				$textValue = array();
+
+				foreach ($values as $value)
+				{
+					$db    = $this->getDbo();
+					$query = $db->getQuery(true);
+					$query
+						->select('`#__dt_whatsapp_tenants_keywords_4169679`.`name`')
+						->from($db->quoteName('#__dt_whatsapp_tenants_keywords', '#__dt_whatsapp_tenants_keywords_4169679'))
+						->where($db->quoteName('#__dt_whatsapp_tenants_keywords_4169679.name') . ' = '. $db->quote($db->escape($value)));
+
+					$db->setQuery($query);
+					$results = $db->loadObject();
+
+					if ($results)
+					{
+						$textValue[] = $results->name;
+					}
+				}
+
+				$oneItem->keyword_id = !empty($textValue) ? implode(', ', $textValue) : $oneItem->keyword_id;
+			}
 
 			if (isset($oneItem->template_id))
 			{

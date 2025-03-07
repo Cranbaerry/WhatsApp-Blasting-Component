@@ -13,6 +13,7 @@
       <option value="2">JARCHIVED</option>
       <option value="-2">JTRASHED</option>
     </field>
+    <field name="scheduled_message_json" filter="safehtml" type="textarea" label="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSKEYWORD_SCHEDULED_MESSAGE_JSON" description="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_DESC_WHATSAPPTENANTSKEYWORD_SCHEDULED_MESSAGE_JSON" hint="COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSKEYWORD_SCHEDULED_MESSAGE_JSON"/>
     <field name="version_note" type="text" label="JGLOBAL_FIELD_VERSION_NOTE_LABEL" description="JGLOBAL_FIELD_VERSION_NOTE_DESC" class="inputbox" size="45" labelclass="control-label"/>
   </fieldset>
 </form>

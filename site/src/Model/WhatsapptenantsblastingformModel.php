@@ -342,6 +342,20 @@ class WhatsapptenantsblastingformModel extends FormModel
 		if ($data)
 		{
 			
+		// Support for multiple or not foreign key field: type
+		$array = array();
+
+		foreach ((array) $data->type as $value)
+		{
+			if (!is_array($value))
+			{
+				$array[] = $value;
+			}
+		}
+		if(!empty($array)){
+
+		$data->type = $array;
+		}
 		// Support for multiple or not foreign key field: mode
 		$array = array();
 

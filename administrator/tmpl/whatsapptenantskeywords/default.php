@@ -70,6 +70,9 @@ if (!empty($saveOrder))
 						<th class='left'>
 							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSKEYWORDS_CREATED_DATE', 'a.created_date', $listDirn, $listOrder); ?>
 						</th>
+						<th class='left'>
+							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSKEYWORDS_SCHEDULED_MESSAGE_JSON', 'a.scheduled_message_json', $listDirn, $listOrder); ?>
+						</th>
 						
 					</tr>
 					</thead>
@@ -112,6 +115,9 @@ if (!empty($saveOrder))
 							</td>
 							<td>
 								<?php echo $item->created_date; ?>
+							</td>
+							<td>
+								<?php echo $item->scheduled_message_json; ?>
 							</td>
 							
 

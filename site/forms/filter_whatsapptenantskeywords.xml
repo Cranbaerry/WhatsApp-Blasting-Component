@@ -18,7 +18,7 @@
                default="a.id DESC"
         >
             <option value="">JGLOBAL_SORT_BY</option>
-            <option value="a.created_date ASC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_CREATED_DATE_ASC</option><option value="a.created_date DESC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_CREATED_DATE_DESC</option><option value="a.name ASC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_NAME_ASC</option><option value="a.name DESC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_NAME_DESC</option><option value="a.state ASC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_STATE_ASC</option><option value="a.state DESC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_STATE_DESC</option>
+            <option value="a.created_date ASC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_CREATED_DATE_ASC</option><option value="a.created_date DESC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_CREATED_DATE_DESC</option><option value="a.name ASC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_NAME_ASC</option><option value="a.name DESC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_NAME_DESC</option><option value="a.state ASC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_STATE_ASC</option><option value="a.state DESC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_STATE_DESC</option><option value="a.scheduled_message_json ASC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_SCHEDULED_MESSAGE_JSON_ASC</option><option value="a.scheduled_message_json DESC">COM_DT_WHATSAPP_TENANTS_BLASTINGS_SCHEDULED_MESSAGE_JSON_DESC</option>
 
         </field>
 

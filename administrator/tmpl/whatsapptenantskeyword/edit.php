@@ -35,6 +35,7 @@ HTMLHelper::_('bootstrap.tooltip');
 				<legend><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FIELDSET_WHATSAPPTENANTSKEYWORD'); ?></legend>
 				<?php echo $this->form->renderField('name'); ?>
 				<?php echo $this->form->renderField('state'); ?>
+				<?php echo $this->form->renderField('scheduled_message_json'); ?>
 			</fieldset>
 		</div>
 	</div>

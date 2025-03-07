@@ -62,6 +62,10 @@ $wa->useStyle('com_dt_whatsapp_tenants_blastings.list');
 						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSKEYWORDS_CREATED_DATE', 'a.created_date', $listDirn, $listOrder); ?>
 					</th>
 
+					<th class=''>
+						<?php echo HTMLHelper::_('grid.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSKEYWORDS_SCHEDULED_MESSAGE_JSON', 'a.scheduled_message_json', $listDirn, $listOrder); ?>
+					</th>
+
 						<?php if ($canEdit || $canDelete): ?>
 					<th class="center">
 						<?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSKEYWORDS_ACTIONS'); ?>
@@ -109,6 +113,9 @@ $wa->useStyle('com_dt_whatsapp_tenants_blastings.list');
 					</td>
 					<td>
 						<?php echo $item->created_date; ?>
+					</td>
+					<td>
+						<?php echo $item->scheduled_message_json; ?>
 					</td>
 					<?php if ($canEdit || $canDelete): ?>
 						<td class="center">

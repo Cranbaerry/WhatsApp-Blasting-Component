@@ -47,6 +47,7 @@ class WhatsapptenantskeywordsModel extends ListModel
 				'created_date', 'a.created_date',
 				'name', 'a.name',
 				'state', 'a.state',
+				'scheduled_message_json', 'a.scheduled_message_json',
 			);
 		}
 

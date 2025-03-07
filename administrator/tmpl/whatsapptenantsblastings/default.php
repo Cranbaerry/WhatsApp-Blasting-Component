@@ -70,7 +70,13 @@ if (!empty($saveOrder))
 						
 						
 						<th class='left'>
+							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSBLASTINGS_TYPE', 'a.type', $listDirn, $listOrder); ?>
+						</th>
+						<th class='left'>
 							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSBLASTINGS_TEMPLATE_ID', 'a.template_id', $listDirn, $listOrder); ?>
+						</th>
+						<th class='left'>
+							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSBLASTINGS_KEYWORD_ID', 'a.keyword_id', $listDirn, $listOrder); ?>
 						</th>
 						<th class='left'>
 							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSBLASTINGS_STATUS', 'a.status', $listDirn, $listOrder); ?>
@@ -82,9 +88,6 @@ if (!empty($saveOrder))
 							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSBLASTINGS_SCHEDULED_TIME', 'a.scheduled_time', $listDirn, $listOrder); ?>
 						</th>
 						
-					<th scope="col" class="w-3 d-none d-lg-table-cell" >
-
-						<?php echo HTMLHelper::_('searchtools.sort',  'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>					</th>
 					</tr>
 					</thead>
 					<tfoot>
@@ -138,7 +141,13 @@ if (!empty($saveOrder))
 							
 							
 							<td>
+								<?php echo $item->type; ?>
+							</td>
+							<td>
 								<?php echo $item->template_id; ?>
+							</td>
+							<td>
+								<?php echo $item->keyword_id; ?>
 							</td>
 							<td>
 								<?php if (isset($item->checked_out) && $item->checked_out && ($canEdit || $canChange)) : ?>
@@ -159,11 +168,6 @@ if (!empty($saveOrder))
 								<?php echo $item->scheduled_time; ?>
 							</td>
 							
-							<td class="d-none d-lg-table-cell">
-							<?php echo $item->id; ?>
-
-							</td>
-
 
 						</tr>
 					<?php endforeach; ?>

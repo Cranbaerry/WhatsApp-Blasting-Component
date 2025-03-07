@@ -81,6 +81,8 @@ $canState = Factory::getApplication()->getIdentity()->authorise('core.edit.state
 		<?php endif; ?>
 	</div>
 
+	<?php echo $this->form->renderField('scheduled_message_json'); ?>
+
 	<?php echo HTMLHelper::_('uitab.endTab'); ?>
 			<div class="control-group">
 				<div class="controls">

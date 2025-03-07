@@ -46,6 +46,11 @@ if (!$canEdit && Factory::getApplication()->getIdentity()->authorise('core.edit.
 			<i class="icon-<?php echo ($this->item->state == 1) ? 'publish' : 'unpublish'; ?>"></i></td>
 		</tr>
 
+		<tr>
+			<th><?php echo Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_FORM_LBL_WHATSAPPTENANTSKEYWORD_SCHEDULED_MESSAGE_JSON'); ?></th>
+			<td><?php echo nl2br($this->item->scheduled_message_json); ?></td>
+		</tr>
+
 	</table>
 
 </div>
