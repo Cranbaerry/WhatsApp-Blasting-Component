@@ -73,6 +73,9 @@ if (!empty($saveOrder))
 							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_TARGET_PHONE_NUMBER', 'a.target_phone_number', $listDirn, $listOrder); ?>
 						</th>
 						<th class='left'>
+							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_TYPE', 'a.type', $listDirn, $listOrder); ?>
+						</th>
+						<th class='left'>
 							<?php echo HTMLHelper::_('searchtools.sort',  'COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_TEMPLATE_ID', 'a.template_id', $listDirn, $listOrder); ?>
 						</th>
 						<th class='left'>
@@ -148,6 +151,9 @@ if (!empty($saveOrder))
 								<?php else : ?>
 												<?php echo $this->escape($item->target_phone_number); ?>
 								<?php endif; ?>
+							</td>
+							<td>
+								<?php echo $item->type; ?>
 							</td>
 							<td>
 								<?php echo $item->template_id; ?>

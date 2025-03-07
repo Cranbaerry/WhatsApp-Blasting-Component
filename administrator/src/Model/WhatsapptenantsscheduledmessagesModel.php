@@ -334,6 +334,7 @@ class WhatsapptenantsscheduledmessagesModel extends ListModel
 
 				$oneItem->keyword_id = !empty($textValue) ? implode(', ', $textValue) : $oneItem->keyword_id;
 			}
+					$oneItem->type = !empty($oneItem->type) ? Text::_('COM_DT_WHATSAPP_TENANTS_BLASTINGS_WHATSAPPTENANTSSCHEDULEDMESSAGES_TYPE_OPTION_' . preg_replace('/[^A-Za-z0-9\_-]/', '',strtoupper(str_replace(' ', '_',$oneItem->type)))) : '';
 
 			if (isset($oneItem->template_id))
 			{
